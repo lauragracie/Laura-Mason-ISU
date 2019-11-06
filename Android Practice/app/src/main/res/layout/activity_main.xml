@@ -31,8 +31,14 @@
         android:layout_height="621dp"
         android:contentDescription="@string/no_description"
         android:scaleType="fitXY"
-        android:src="@drawable/floor1north"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="center" />
+        android:src="@drawable/floor1north" />
+
+    <ImageView
+        android:id="@+id/floor2north"
+        android:layout_width="334dp"
+        android:layout_height="621dp"
+        android:contentDescription="@string/no_description"
+        android:scaleType="fitXY"
+        android:src="@drawable/floor2north" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

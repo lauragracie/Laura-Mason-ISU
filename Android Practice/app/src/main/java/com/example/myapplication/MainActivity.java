@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
-    ImageView imgview;
+    ImageView floor1north;
 
 
     @Override
@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        imgview = (ImageView)findViewById(R.id.floor1north);
-        imgview.setRotation((float) -90.0);
+        floor1north = (ImageView)findViewById(R.id.floor1north);
+        floor1north.setRotation((float) -90.0);
 
     }
 
