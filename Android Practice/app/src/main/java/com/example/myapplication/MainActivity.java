@@ -23,14 +23,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+
 public class MainActivity extends AppCompatActivity {
+    final int numRooms = 2;
+    final int numDataFields = 3;
 
     ImageButton searchButton;
     EditText searchBar;
     TextView mText;
-    Context thisContext;
+    TextView mText2;
+    TextView mText3;
+    TextView mText4;
+
     AssetManager assetManager;
 
+    String[][] roomDatabase = new String[numRooms][numDataFields];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getDatabase(roomDatabase);
 
         //Initialize buttons
         searchButton = (ImageButton)findViewById(R.id.searchButton);
@@ -47,9 +56,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view){
                 searchBar = (EditText)findViewById(R.id.searchBar);
                 mText = (TextView)findViewById(R.id.mText);
+                mText2 = (TextView)findViewById(R.id.mText2);
+                mText3 = (TextView)findViewById(R.id.mText3);
+                mText4 = (TextView)findViewById(R.id.mText4);
                 //mText.setText("Room #: " +searchBar.getText().toString()+"!");
-                mText.setText(readFromFile(getApplicationContext()));
-                mText.setText(readFromFile(getApplicationContext()));
+                //mText.setText(readFromFile(getApplicationContext()));
+                //mText.setText(readFromFile(getApplicationContext()));
+                mText.setText(roomDatabase[0][0]);
+                mText2.setText(roomDatabase[0][1]);
+                mText3.setText(roomDatabase[0][2]);
+                mText4.setText(roomDatabase[1][0]);
             }
         });
 
@@ -62,15 +78,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private String readFromFile(Context context) {
-
-        this.thisContext = context;
+    private boolean getDatabase(String[][] database) {
         assetManager = getAssets();
-        String ret = "";
+        //String input = "";
 
         try {
             InputStream inputStream = assetManager.open("RoomDatabase.txt");
-            //InputStream inputStream = context.openFileInput("RoomDatabase.txt");
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -78,24 +91,36 @@ public class MainActivity extends AppCompatActivity {
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                if((receiveString = bufferedReader.readLine()) != null ){
+                /*if((receiveString = bufferedReader.readLine()) != null ){
                     stringBuilder.append(receiveString);
-                }
-                /*while ( (receiveString = bufferedReader.readLine()) != null ) {
-                    stringBuilder.append(receiveString).append("\n");
                 }*/
 
+                for(int i = 0; i<numRooms; i++){
+                    //Read in list number of room, but don't process the data.
+                    bufferedReader.readLine();
+                    for(int j = 0; j<numDataFields; j++){
+                        if( (receiveString = bufferedReader.readLine()) != null ) {
+                            //stringBuilder.append(receiveString);
+                            //database[i][j] = stringBuilder.toString();
+                            database[i][j] = receiveString;
+                        }
+                    }
+                    //Read in empty space between entries.
+                    bufferedReader.readLine();
+                }
+
                 inputStream.close();
-                ret = stringBuilder.toString();
+                //input = stringBuilder.toString();
             }
+            return true;
         }
         catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
+            return false;
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
+            return false;
         }
-
-        return ret;
     }
 
     @Override
