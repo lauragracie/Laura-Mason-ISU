@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     ImageButton searchButton;
     EditText searchBar;
     TextView mText;
+    Context thisContext;
+    AssetManager assetManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view){
                 searchBar = (EditText)findViewById(R.id.searchBar);
                 mText = (TextView)findViewById(R.id.mText);
-                mText.setText("Room #: " +searchBar.getText().toString()+"!");
+                //mText.setText("Room #: " +searchBar.getText().toString()+"!");
+                mText.setText(readFromFile(getApplicationContext()));
+                mText.setText(readFromFile(getApplicationContext()));
             }
         });
 
@@ -56,14 +62,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private String
+    private String readFromFile(Context context) {
 
-    readFromFile(Context context) {
-
+        this.thisContext = context;
+        assetManager = getAssets();
         String ret = "";
 
         try {
-            InputStream inputStream = context.openFileInput("RoomDatabase.txt");
+            InputStream inputStream = assetManager.open("RoomDatabase.txt");
+            //InputStream inputStream = context.openFileInput("RoomDatabase.txt");
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -71,9 +78,12 @@ public class MainActivity extends AppCompatActivity {
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                if((receiveString = bufferedReader.readLine()) != null ){
                     stringBuilder.append(receiveString);
                 }
+                /*while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString).append("\n");
+                }*/
 
                 inputStream.close();
                 ret = stringBuilder.toString();
