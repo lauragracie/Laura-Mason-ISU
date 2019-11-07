@@ -12,6 +12,9 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
     ImageView floor1north;
+    ImageView floor2north;
+    ImageView floor3north;
+    ImageView floor4north;
 
 
     @Override
@@ -21,8 +24,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        floor1north = (ImageView)findViewById(R.id.floor1north);
-        floor1north.setRotation((float) -90.0);
+        floor1north = findViewById(R.id.floor1north);
+        floor2north = findViewById(R.id.floor2north);
+        floor3north = findViewById(R.id.floor3north);
+        floor4north = findViewById(R.id.floor4north);
+
+
 
     }
 

@@ -27,18 +27,38 @@
 
     <ImageView
         android:id="@+id/floor1north"
-        android:layout_width="334dp"
-        android:layout_height="621dp"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:rotation="-90"
         android:contentDescription="@string/no_description"
         android:scaleType="fitXY"
         android:src="@drawable/floor1north" />
 
     <ImageView
         android:id="@+id/floor2north"
-        android:layout_width="334dp"
-        android:layout_height="621dp"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:rotation="-90"
         android:contentDescription="@string/no_description"
         android:scaleType="fitXY"
         android:src="@drawable/floor2north" />
+
+    <ImageView
+        android:id="@+id/floor3north"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:rotation="-90"
+        android:contentDescription="@string/no_description"
+        android:scaleType="fitXY"
+        android:src="@drawable/floor3north" />
+
+    <ImageView
+        android:id="@+id/floor4north"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:rotation="-90"
+        android:contentDescription="@string/no_description"
+        android:scaleType="fitXY"
+        android:src="@drawable/floor4north" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
