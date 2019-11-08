@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -25,15 +23,15 @@ import java.io.InputStreamReader;
 
 
 public class MainActivity extends AppCompatActivity {
-    final int numRooms = 2;
-    final int numDataFields = 3;
+    final int numRooms = 76;
+    final int numDataFields = 4;
 
     ImageButton searchButton;
     EditText searchBar;
-    TextView mText;
-    TextView mText2;
-    TextView mText3;
-    TextView mText4;
+    TextView roomNumber;
+    TextView building;
+    TextView floor;
+    TextView roomName;
 
     AssetManager assetManager;
 
@@ -52,20 +50,29 @@ public class MainActivity extends AppCompatActivity {
         searchButton = (ImageButton)findViewById(R.id.searchButton);
         FloatingActionButton fab = findViewById(R.id.fab);
 
+        //Initialize text fields
+        searchBar = (EditText)findViewById(R.id.searchBar);
+        roomNumber = (TextView)findViewById(R.id.roomNumber);
+        building= (TextView)findViewById(R.id.building);
+        floor = (TextView)findViewById(R.id.floor);
+        roomName = (TextView)findViewById(R.id.roomName);
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                searchBar = (EditText)findViewById(R.id.searchBar);
-                mText = (TextView)findViewById(R.id.mText);
-                mText2 = (TextView)findViewById(R.id.mText2);
-                mText3 = (TextView)findViewById(R.id.mText3);
-                mText4 = (TextView)findViewById(R.id.mText4);
-                //mText.setText("Room #: " +searchBar.getText().toString()+"!");
-                //mText.setText(readFromFile(getApplicationContext()));
-                //mText.setText(readFromFile(getApplicationContext()));
-                mText.setText(roomDatabase[0][0]);
-                mText2.setText(roomDatabase[0][1]);
-                mText3.setText(roomDatabase[0][2]);
-                mText4.setText(roomDatabase[1][0]);
+
+                int roomIndex = getRoomIndex(searchBar.getText().toString());
+                if(roomIndex != -1){
+                    roomNumber.setText(roomDatabase[roomIndex][0]);
+                    building.setText(roomDatabase[roomIndex][1]);
+                    floor.setText(roomDatabase[roomIndex][2]);
+                    roomName.setText(roomDatabase[roomIndex][3]);
+                }
+                else{
+                    roomNumber.setText("Couldn't find a room with that name");
+                    building.setText("");
+                    floor.setText("");
+                    roomName.setText("");
+                }
             }
         });
 
@@ -121,6 +128,15 @@ public class MainActivity extends AppCompatActivity {
             Log.e("login activity", "Can not read file: " + e.toString());
             return false;
         }
+    }
+
+    private int getRoomIndex(String n){
+        for(int j = 0; j < numRooms; j++){
+            if(n.equals(roomDatabase[j][0])){
+                return j;
+            }
+        }
+        return -1;
     }
 
     @Override

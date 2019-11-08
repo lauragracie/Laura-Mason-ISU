@@ -10,10 +10,10 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/mText"
+        android:id="@+id/roomNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Room Number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -21,10 +21,10 @@
         app:layout_constraintVertical_bias="0.353" />
 
     <TextView
-        android:id="@+id/mText3"
+        android:id="@+id/floor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Floor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -32,10 +32,10 @@
         app:layout_constraintVertical_bias="0.458" />
 
     <TextView
-        android:id="@+id/mText2"
+        android:id="@+id/building"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Building"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -43,10 +43,10 @@
         app:layout_constraintVertical_bias="0.405" />
 
     <TextView
-        android:id="@+id/mText4"
+        android:id="@+id/roomName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
