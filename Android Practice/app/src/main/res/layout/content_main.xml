@@ -7,4 +7,72 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main"
-    tools:context=".MainActivity"/>
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/floor1north"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:layout_marginEnd="38dp"
+        android:alpha="0"
+        android:contentDescription="@string/no_description"
+        android:rotation="-90"
+        android:scaleType="fitXY"
+        android:src="@drawable/floor1north"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/floor2north"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:layout_marginEnd="38dp"
+        android:alpha="0"
+        android:contentDescription="@string/no_description"
+        android:rotation="-90"
+        android:src="@drawable/floor2north"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/floor3north"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:layout_marginEnd="38dp"
+        android:alpha="0"
+        android:contentDescription="@string/no_description"
+        android:rotation="-90"
+        android:src="@drawable/floor3north"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/floor4north"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:layout_marginEnd="38dp"
+        android:alpha="0"
+        android:contentDescription="@string/no_description"
+        android:rotation="-90"
+        android:src="@drawable/floor4north"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/bfloor1north"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="102dp"
+        android:text="emems"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bfloor1north" />
+</androidx.constraintlayout.widget.ConstraintLayout>

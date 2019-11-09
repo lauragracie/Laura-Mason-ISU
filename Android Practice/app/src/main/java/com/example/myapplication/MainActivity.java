@@ -8,9 +8,13 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    Button bfloor1north;
+    TextView bottomtext;
     ImageView floor1north;
     ImageView floor2north;
     ImageView floor3north;
@@ -24,13 +28,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        floor1north = findViewById(R.id.floor1north);
-        floor2north = findViewById(R.id.floor2north);
-        floor3north = findViewById(R.id.floor3north);
-        floor4north = findViewById(R.id.floor4north);
+        bfloor1north = findViewById(R.id.bfloor1north);
+        bottomtext = (TextView) findViewById(R.id.textView2);
+        floor1north = (ImageView) findViewById(R.id.floor1north);
+        floor2north = (ImageView) findViewById(R.id.floor2north);
+        floor3north = (ImageView) findViewById(R.id.floor3north);
+        floor4north = (ImageView) findViewById(R.id.floor4north);
 
-
-
+        bfloor1north.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view){
+                floor1north.setImageAlpha(255);
+                floor2north.setImageAlpha(0);
+                floor3north.setImageAlpha(0);
+                floor4north.setImageAlpha(0);
+                bottomtext.setText("hoh sis");
+            }
+        });
     }
 
     @Override
