@@ -8,9 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -56,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
         building= (TextView)findViewById(R.id.building);
         floor = (TextView)findViewById(R.id.floor);
         roomName = (TextView)findViewById(R.id.roomName);
+
+        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    searchButton.performClick();
+                }
+                return false;
+            }
+        });
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
