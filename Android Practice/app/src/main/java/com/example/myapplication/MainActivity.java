@@ -23,7 +23,7 @@ import java.io.InputStreamReader;
 
 
 public class MainActivity extends AppCompatActivity {
-    final int numRooms = 76;
+    final int numRooms = 148;
     final int numDataFields = 4;
 
     ImageButton searchButton;
