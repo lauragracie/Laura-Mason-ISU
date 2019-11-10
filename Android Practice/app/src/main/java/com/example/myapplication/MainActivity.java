@@ -37,11 +37,10 @@ public class MainActivity extends AppCompatActivity {
 
         bfloor1north.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
-                floor1north.setImageAlpha(255);
+                floor1north.setAlpha(1.0f);
                 floor2north.setImageAlpha(0);
                 floor3north.setImageAlpha(0);
                 floor4north.setImageAlpha(0);
-                bottomtext.setText("hoh sis");
             }
         });
     }
