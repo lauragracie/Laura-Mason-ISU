@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+
+import android.widget.ImageView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -22,7 +24,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+
 public class MainActivity extends AppCompatActivity {
+    Button bfloor1north;
+    Button bfloor2north;
+    Button bfloor3north;
+    Button bfloor4north;
+    ImageView floor1north;
+    ImageView floor2north;
+    ImageView floor3north;
+    ImageView floor4north;
+
 
     ImageButton searchButton;
     EditText searchBar;
@@ -38,7 +50,51 @@ public class MainActivity extends AppCompatActivity {
         //Initialize buttons
         searchButton = (ImageButton)findViewById(R.id.searchButton);
         FloatingActionButton fab = findViewById(R.id.fab);
+        bfloor1north = findViewById(R.id.bfloor1north);
+        bfloor2north = findViewById(R.id.bfloor2north);
+        bfloor3north = findViewById(R.id.bfloor3north);
+        bfloor4north = findViewById(R.id.bfloor4north);
+        floor1north = findViewById(R.id.floor1north);
+        floor2north = findViewById(R.id.floor2north);
+        floor3north = findViewById(R.id.floor3north);
+        floor4north = findViewById(R.id.floor4north);
 
+        bfloor1north.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view){
+                floor1north.setAlpha(1.0f);
+                floor2north.setAlpha(0f);
+                floor3north.setAlpha(0f);
+                floor4north.setAlpha(0f);
+            }
+        });
+
+        bfloor2north.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view){
+                floor1north.setAlpha(0f);
+                floor2north.setAlpha(1.0f);
+                floor3north.setAlpha(0f);
+                floor4north.setAlpha(0f);
+            }
+        });
+
+        bfloor3north.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view){
+                floor1north.setAlpha(0f);
+                floor2north.setAlpha(0f);
+                floor3north.setAlpha(1.0f);
+                floor4north.setAlpha(0f);
+            }
+        });
+
+        bfloor4north.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view){
+                floor1north.setAlpha(0f);
+                floor2north.setAlpha(0f);
+                floor3north.setAlpha(0f);
+                floor4north.setAlpha(1.0f);
+              }
+        });
+        
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 searchBar = (EditText)findViewById(R.id.searchBar);
@@ -54,11 +110,8 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
 
-    private String
-
-    readFromFile(Context context) {
+    private String readFromFile(Context context) {
 
         String ret = "";
 
