@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //Initialize buttons
-        searchButton = (ImageButton)findViewById(R.id.searchButton);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        searchButton = (ImageButton) findViewById(R.id.searchButton);
+        //FloatingActionButton fab = findViewById(R.id.fab);
         bfloor1north = findViewById(R.id.bfloor1north);
         bfloor2north = findViewById(R.id.bfloor2north);
         bfloor3north = findViewById(R.id.bfloor3north);
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         floor4north = findViewById(R.id.floor4north);
 
         bfloor1north.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floor1north.setAlpha(1.0f);
                 floor2north.setAlpha(0f);
                 floor3north.setAlpha(0f);
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bfloor2north.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floor1north.setAlpha(0f);
                 floor2north.setAlpha(1.0f);
                 floor3north.setAlpha(0f);
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bfloor3north.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floor1north.setAlpha(0f);
                 floor2north.setAlpha(0f);
                 floor3north.setAlpha(1.0f);
@@ -87,31 +87,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bfloor4north.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floor1north.setAlpha(0f);
                 floor2north.setAlpha(0f);
                 floor3north.setAlpha(0f);
                 floor4north.setAlpha(1.0f);
-              }
-        });
-        
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                searchBar = (EditText)findViewById(R.id.searchBar);
-                mText = (TextView)findViewById(R.id.mText);
-                mText.setText("Room #: " +searchBar.getText().toString()+"!");
             }
         });
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                searchBar = (EditText) findViewById(R.id.searchBar);
+                mText = (TextView) findViewById(R.id.mText);
+                mText.setText("Room #: " + searchBar.getText().toString() + "!");
+            }
+        });
+
+        /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
-
-    private String readFromFile(Context context) {
+        });*/
+    }
+    /*private String readFromFile(Context context) {
 
         String ret = "";
 
@@ -139,16 +139,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return ret;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -161,5 +161,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }
