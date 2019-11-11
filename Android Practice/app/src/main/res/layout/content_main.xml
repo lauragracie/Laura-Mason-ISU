@@ -48,8 +48,85 @@
         android:layout_height="wrap_content"
         android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/floor1north"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:layout_marginEnd="38dp"
+        android:alpha="0"
+        android:contentDescription="@string/no_description"
+        android:rotation="-90"
+        android:scaleType="fitXY"
+        android:src="@drawable/floor1north"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/floor2north"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:layout_marginEnd="38dp"
+        android:alpha="0"
+        android:contentDescription="@string/no_description"
+        android:rotation="-90"
+        android:src="@drawable/floor2north" />
+
+    <ImageView
+        android:id="@+id/floor3north"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:layout_marginEnd="38dp"
+        android:alpha="0"
+        android:contentDescription="@string/no_description"
+        android:rotation="-90"
+        android:src="@drawable/floor3north"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/floor4north"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:layout_marginEnd="38dp"
+        android:alpha="0"
+        android:contentDescription="@string/no_description"
+        android:rotation="-90"
+        android:src="@drawable/floor4north"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/bfloor1north"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bfloor2north"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="200"
+        app:layout_constraintStart_toEndOf="@+id/bfloor1north"
+        app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+        android:id="@+id/bfloor3north"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="300"
+        app:layout_constraintStart_toEndOf="@id/bfloor2north"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bfloor4north"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="400"
+        app:layout_constraintStart_toEndOf="@id/bfloor3north"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -78,6 +155,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_search" />
 
+
     <ImageButton
         android:id="@+id/clearButton"
         android:layout_width="wrap_content"
@@ -88,5 +166,15 @@
         android:src="@android:drawable/btn_dialog"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="173dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/floor1north" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
