@@ -58,6 +58,42 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ImageView
+        android:id="@+id/floor1south"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:layout_marginEnd="38dp"
+        android:alpha="0"
+        android:contentDescription="@string/no_description"
+        android:rotation="-90"
+        android:src="@drawable/floor1south"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/floor2south"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:layout_marginEnd="38dp"
+        android:alpha="0"
+        android:contentDescription="@string/no_description"
+        android:rotation="-90"
+        android:src="@drawable/floor2south"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/floor3south"
+        android:layout_width="300dp"
+        android:layout_height="627dp"
+        android:layout_marginEnd="38dp"
+        android:alpha="0"
+        android:contentDescription="@string/no_description"
+        android:rotation="-90"
+        android:src="@drawable/floor3south"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <Button
         android:id="@+id/bfloor1north"
         android:layout_width="100dp"
@@ -89,5 +125,37 @@
         android:text="400"
         app:layout_constraintStart_toEndOf="@id/bfloor3north"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bfloor1south"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="150"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bfloor1north" />
+
+    <Button
+        android:id="@+id/bfloor2south"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="250"
+        app:layout_constraintStart_toEndOf="@+id/bfloor1south"
+        app:layout_constraintTop_toBottomOf="@+id/bfloor2north" />
+
+    <Button
+        android:id="@+id/bfloor3south"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="350"
+        app:layout_constraintStart_toEndOf="@+id/bfloor2south"
+        app:layout_constraintTop_toBottomOf="@+id/bfloor3north" />
+
+    <Button
+        android:id="@+id/bclear"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="CLEAR"
+        app:layout_constraintStart_toEndOf="@+id/bfloor3south"
+        app:layout_constraintTop_toBottomOf="@+id/bfloor4north" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
