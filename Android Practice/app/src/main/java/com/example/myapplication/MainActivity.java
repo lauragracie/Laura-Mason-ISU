@@ -62,11 +62,9 @@ public class MainActivity extends AppCompatActivity {
         getDatabase(roomDatabase);
 
         //Initialize buttons
-        searchButton = (ImageButton)findViewById(R.id.searchButton);
-        clearButton = (ImageButton)findViewById(R.id.clearButton);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        searchButton = (ImageButton) findViewById(R.id.searchButton);
-        //FloatingActionButton fab = findViewById(R.id.fab);
+        searchButton = findViewById(R.id.searchButton);
+        clearButton = findViewById(R.id.clearButton);
+        searchButton = findViewById(R.id.searchButton);
         bfloor1north = findViewById(R.id.bfloor1north);
         bfloor2north = findViewById(R.id.bfloor2north);
         bfloor3north = findViewById(R.id.bfloor3north);
@@ -113,11 +111,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Initialize text fields
-        searchBar = (EditText)findViewById(R.id.searchBar);
-        roomNumber = (TextView)findViewById(R.id.roomNumber);
-        building= (TextView)findViewById(R.id.building);
-        floor = (TextView)findViewById(R.id.floor);
-        roomName = (TextView)findViewById(R.id.roomName);
+        searchBar = findViewById(R.id.searchBar);
+        roomNumber = findViewById(R.id.roomNumber);
+        building= findViewById(R.id.building);
+        floor = findViewById(R.id.floor);
+        roomName = findViewById(R.id.roomName);
 
         searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -137,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                     building.setText(roomDatabase[roomIndex][1]);
                     floor.setText(roomDatabase[roomIndex][2]);
                     roomName.setText(roomDatabase[roomIndex][3]);
+                    displayFloor(roomDatabase[roomIndex][2]);
                 }
                 else{
                     roomNumber.setText("Couldn't find a room with that name");
@@ -172,19 +171,12 @@ public class MainActivity extends AppCompatActivity {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
-
-                /*if((receiveString = bufferedReader.readLine()) != null ){
-                    stringBuilder.append(receiveString);
-                }*/
 
                 for(int i = 0; i<numRooms; i++){
                     //Read in list number of room, but don't process the data.
                     bufferedReader.readLine();
                     for(int j = 0; j<numDataFields; j++){
                         if( (receiveString = bufferedReader.readLine()) != null ) {
-                            //stringBuilder.append(receiveString);
-                            //database[i][j] = stringBuilder.toString();
                             database[i][j] = receiveString;
                         }
                     }
@@ -215,6 +207,26 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return -1;
+    }
+
+    private void displayFloor(String floor){
+        switch(floor){
+            case "1":
+                bfloor1north.performClick();
+                break;
+            case "2":
+                bfloor2north.performClick();
+                break;
+            case "3":
+                bfloor3north.performClick();
+                break;
+            case "4":
+                bfloor4north.performClick();
+                break;
+            default:
+                bfloor2north.performClick();
+                break;
+        }
     }
 
     /*@Override
