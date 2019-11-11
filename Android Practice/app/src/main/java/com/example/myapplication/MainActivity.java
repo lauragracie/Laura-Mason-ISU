@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     Button bfloor1north;
-    TextView bottomtext;
+    Button bfloor2north;
+    Button bfloor3north;
+    Button bfloor4north;
     ImageView floor1north;
     ImageView floor2north;
     ImageView floor3north;
@@ -29,20 +31,50 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         bfloor1north = findViewById(R.id.bfloor1north);
-        bottomtext = (TextView) findViewById(R.id.textView2);
-        floor1north = (ImageView) findViewById(R.id.floor1north);
-        floor2north = (ImageView) findViewById(R.id.floor2north);
-        floor3north = (ImageView) findViewById(R.id.floor3north);
-        floor4north = (ImageView) findViewById(R.id.floor4north);
+        bfloor2north = findViewById(R.id.bfloor2north);
+        bfloor3north = findViewById(R.id.bfloor3north);
+        bfloor4north = findViewById(R.id.bfloor4north);
+        floor1north = findViewById(R.id.floor1north);
+        floor2north = findViewById(R.id.floor2north);
+        floor3north = findViewById(R.id.floor3north);
+        floor4north = findViewById(R.id.floor4north);
 
         bfloor1north.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
                 floor1north.setAlpha(1.0f);
-                floor2north.setImageAlpha(0);
-                floor3north.setImageAlpha(0);
-                floor4north.setImageAlpha(0);
+                floor2north.setAlpha(0f);
+                floor3north.setAlpha(0f);
+                floor4north.setAlpha(0f);
             }
         });
+
+        bfloor2north.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view){
+                floor1north.setAlpha(0f);
+                floor2north.setAlpha(1.0f);
+                floor3north.setAlpha(0f);
+                floor4north.setAlpha(0f);
+            }
+        });
+
+        bfloor3north.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view){
+                floor1north.setAlpha(0f);
+                floor2north.setAlpha(0f);
+                floor3north.setAlpha(1.0f);
+                floor4north.setAlpha(0f);
+            }
+        });
+
+        bfloor4north.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View view){
+                floor1north.setAlpha(0f);
+                floor2north.setAlpha(0f);
+                floor3north.setAlpha(0f);
+                floor4north.setAlpha(1.0f);
+            }
+        });
+
     }
 
     @Override

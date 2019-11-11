@@ -66,13 +66,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="102dp"
-        android:text="emems"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bfloor1north" />
+    <Button
+        android:id="@+id/bfloor2north"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="200"
+        app:layout_constraintStart_toEndOf="@+id/bfloor1north"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bfloor3north"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="300"
+        app:layout_constraintStart_toEndOf="@id/bfloor2north"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bfloor4north"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="400"
+        app:layout_constraintStart_toEndOf="@id/bfloor3north"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
