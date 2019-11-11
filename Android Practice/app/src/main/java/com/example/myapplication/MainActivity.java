@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -8,11 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-
 import android.widget.ImageView;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -26,6 +27,10 @@ import java.io.InputStreamReader;
 
 
 public class MainActivity extends AppCompatActivity {
+  
+    final int numRooms = 148;
+    final int numDataFields = 4;
+
     Button bfloor1north;
     Button bfloor2north;
     Button bfloor3north;
@@ -34,11 +39,18 @@ public class MainActivity extends AppCompatActivity {
     ImageView floor2north;
     ImageView floor3north;
     ImageView floor4north;
-
-
     ImageButton searchButton;
+    ImageButton clearButton;
+
     EditText searchBar;
-    TextView mText;
+    TextView roomNumber;
+    TextView building;
+    TextView floor;
+    TextView roomName;
+
+    AssetManager assetManager;
+
+    String[][] roomDatabase = new String[numRooms][numDataFields];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +59,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getDatabase(roomDatabase);
+
         //Initialize buttons
+        searchButton = (ImageButton)findViewById(R.id.searchButton);
+        clearButton = (ImageButton)findViewById(R.id.clearButton);
+        FloatingActionButton fab = findViewById(R.id.fab);
         searchButton = (ImageButton) findViewById(R.id.searchButton);
         //FloatingActionButton fab = findViewById(R.id.fab);
         bfloor1north = findViewById(R.id.bfloor1north);
@@ -95,11 +112,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Initialize text fields
+        searchBar = (EditText)findViewById(R.id.searchBar);
+        roomNumber = (TextView)findViewById(R.id.roomNumber);
+        building= (TextView)findViewById(R.id.building);
+        floor = (TextView)findViewById(R.id.floor);
+        roomName = (TextView)findViewById(R.id.roomName);
+
+        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    searchButton.performClick();
+                }
+                return false;
+            }
+        });
+
         searchButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                searchBar = (EditText) findViewById(R.id.searchBar);
-                mText = (TextView) findViewById(R.id.mText);
-                mText.setText("Room #: " + searchBar.getText().toString() + "!");
+            public void onClick(View view){
+
+                int roomIndex = getRoomIndex(searchBar.getText().toString());
+                if(roomIndex != -1){
+                    roomNumber.setText(roomDatabase[roomIndex][0]);
+                    building.setText(roomDatabase[roomIndex][1]);
+                    floor.setText(roomDatabase[roomIndex][2]);
+                    roomName.setText(roomDatabase[roomIndex][3]);
+                }
+                else{
+                    roomNumber.setText("Couldn't find a room with that name");
+                    building.setText("");
+                    floor.setText("");
+                    roomName.setText("");
+                }
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                searchBar.getText().clear();
             }
         });
 
@@ -111,12 +161,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
     }
-    /*private String readFromFile(Context context) {
 
-        String ret = "";
-
+    private boolean getDatabase(String[][] database) {
+        assetManager = getAssets();
+        //String input = "";
         try {
-            InputStream inputStream = context.openFileInput("RoomDatabase.txt");
+            InputStream inputStream = assetManager.open("RoomDatabase.txt");
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -124,22 +174,48 @@ public class MainActivity extends AppCompatActivity {
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                /*if((receiveString = bufferedReader.readLine()) != null ){
                     stringBuilder.append(receiveString);
+                }*/
+
+                for(int i = 0; i<numRooms; i++){
+                    //Read in list number of room, but don't process the data.
+                    bufferedReader.readLine();
+                    for(int j = 0; j<numDataFields; j++){
+                        if( (receiveString = bufferedReader.readLine()) != null ) {
+                            //stringBuilder.append(receiveString);
+                            //database[i][j] = stringBuilder.toString();
+                            database[i][j] = receiveString;
+                        }
+                    }
+                    //Read in empty space between entries.
+                    bufferedReader.readLine();
                 }
 
                 inputStream.close();
-                ret = stringBuilder.toString();
+                //input = stringBuilder.toString();
             }
+            return true;
         }
         catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
+            return false;
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
+            return false;
         }
+    }
 
-        return ret;
-    }*/
+    private int getRoomIndex(String n){
+        for(int j = 0; j < numRooms; j++){
+            if(n.equals(roomDatabase[j][0]) || n.equals(roomDatabase[j][3])){
+                if(!n.equals("N/A")){
+                    return j;
+                }
+            }
+        }
+        return -1;
+    }
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
