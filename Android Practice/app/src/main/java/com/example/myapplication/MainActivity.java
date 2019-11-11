@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     final int numDataFields = 4;
 
     ImageButton searchButton;
+    ImageButton clearButton;
+
     EditText searchBar;
     TextView roomNumber;
     TextView building;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Initialize buttons
         searchButton = (ImageButton)findViewById(R.id.searchButton);
+        clearButton = (ImageButton)findViewById(R.id.clearButton);
         FloatingActionButton fab = findViewById(R.id.fab);
 
         //Initialize text fields
@@ -84,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
                     floor.setText("");
                     roomName.setText("");
                 }
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                searchBar.getText().clear();
             }
         });
 
@@ -143,8 +152,10 @@ public class MainActivity extends AppCompatActivity {
 
     private int getRoomIndex(String n){
         for(int j = 0; j < numRooms; j++){
-            if(n.equals(roomDatabase[j][0])){
-                return j;
+            if(n.equals(roomDatabase[j][0]) || n.equals(roomDatabase[j][3])){
+                if(!n.equals("N/A")){
+                    return j;
+                }
             }
         }
         return -1;
