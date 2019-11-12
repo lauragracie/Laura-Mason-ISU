@@ -35,12 +35,14 @@ public class MainActivity extends AppCompatActivity {
     Button bfloor2north;
     Button bfloor3north;
     Button bfloor4north;
+    ImageButton searchButton;
+    ImageButton clearButton;
+
     ImageView floor1north;
     ImageView floor2north;
     ImageView floor3north;
     ImageView floor4north;
-    ImageButton searchButton;
-    ImageButton clearButton;
+    ImageView location;
 
     EditText searchBar;
     TextView roomNumber;
@@ -69,10 +71,13 @@ public class MainActivity extends AppCompatActivity {
         bfloor2north = findViewById(R.id.bfloor2north);
         bfloor3north = findViewById(R.id.bfloor3north);
         bfloor4north = findViewById(R.id.bfloor4north);
+
+
         floor1north = findViewById(R.id.floor1north);
         floor2north = findViewById(R.id.floor2north);
         floor3north = findViewById(R.id.floor3north);
         floor4north = findViewById(R.id.floor4north);
+        location = findViewById(R.id.location);
 
         bfloor1north.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -136,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                     floor.setText(roomDatabase[roomIndex][2]);
                     roomName.setText(roomDatabase[roomIndex][3]);
                     displayFloor(roomDatabase[roomIndex][2]);
+                    location.setAlpha(1.0f);
                 }
                 else{
                     roomNumber.setText("Couldn't find a room with that name");
@@ -200,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int getRoomIndex(String n){
         for(int j = 0; j < numRooms; j++){
-            if(n.equals(roomDatabase[j][0]) || n.equals(roomDatabase[j][3])){
+            if(n.compareToIgnoreCase(roomDatabase[j][0]) == 0|| n.compareToIgnoreCase(roomDatabase[j][3]) == 0){
                 if(!n.equals("N/A")){
                     return j;
                 }

@@ -91,13 +91,19 @@
         android:id="@+id/floor4north"
         android:layout_width="300dp"
         android:layout_height="627dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="38dp"
         android:alpha="0"
         android:contentDescription="@string/no_description"
         android:rotation="-90"
         android:src="@drawable/floor4north"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintStart_toEndOf="@+id/clearButton"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/bfloor1north"
@@ -178,5 +184,17 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/floor1north" />
+
+    <ImageView
+        android:id="@+id/location"
+        android:layout_width="37dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="304dp"
+        android:alpha="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/floor_location" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
