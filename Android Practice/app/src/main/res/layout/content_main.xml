@@ -18,7 +18,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.353" />
+        app:layout_constraintVertical_bias="0.829" />
 
     <TextView
         android:id="@+id/floor"
@@ -29,7 +29,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.458" />
+        app:layout_constraintVertical_bias="0.9" />
 
     <TextView
         android:id="@+id/building"
@@ -40,12 +40,14 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.405" />
+        app:layout_constraintVertical_bias="0.86" />
 
     <TextView
         android:id="@+id/roomName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="188dp"
+        android:layout_marginBottom="44dp"
         android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -89,20 +91,27 @@
         android:id="@+id/floor4north"
         android:layout_width="300dp"
         android:layout_height="627dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="38dp"
         android:alpha="0"
         android:contentDescription="@string/no_description"
         android:rotation="-90"
         android:src="@drawable/floor4north"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintStart_toEndOf="@+id/clearButton"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/bfloor1north"
         android:layout_width="100dp"
         android:layout_height="50dp"
+        android:layout_marginTop="44dp"
         android:text="100"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -110,31 +119,30 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="200"
-        app:layout_constraintStart_toEndOf="@+id/bfloor1north"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bfloor1north" />
 
-  <Button
+    <Button
         android:id="@+id/bfloor3north"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="300"
-        app:layout_constraintStart_toEndOf="@id/bfloor2north"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bfloor2north" />
 
     <Button
         android:id="@+id/bfloor4north"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="400"
-        app:layout_constraintStart_toEndOf="@id/bfloor3north"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bfloor3north" />
 
     <EditText
         android:id="@+id/searchBar"
         android:layout_width="286dp"
         android:layout_height="45dp"
         android:layout_marginStart="99dp"
-        android:layout_marginLeft="99dp"
         android:ems="10"
         android:hint="Room Number"
         android:inputType="textPersonName"
@@ -176,5 +184,17 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/floor1north" />
+
+    <ImageView
+        android:id="@+id/location"
+        android:layout_width="37dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="304dp"
+        android:alpha="0.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/floor_location" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
