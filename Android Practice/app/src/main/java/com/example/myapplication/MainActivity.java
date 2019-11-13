@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.os.Build;
+import android.content.Context;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -8,14 +9,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.MotionEvent;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.RelativeLayout;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import android.widget.ImageView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
     Button bfloor1north;
@@ -40,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private int _xDelta;
     private int _yDelta;
 
+    ImageButton searchButton;
+    EditText searchBar;
+    TextView mText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Initialize buttons
+        searchButton = (ImageButton)findViewById(R.id.searchButton);
+        FloatingActionButton fab = findViewById(R.id.fab);
         bfloor1north = findViewById(R.id.bfloor1north);
         bfloor2north = findViewById(R.id.bfloor2north);
         bfloor3north = findViewById(R.id.bfloor3north);
@@ -178,6 +195,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             }
         });
 
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                searchBar = (EditText)findViewById(R.id.searchBar);
+                mText = (TextView)findViewById(R.id.mText);
+                mText.setText("Room #: " +searchBar.getText().toString()+"!");
+            }
+        });
+
     }
 
     public boolean onTouch(View view, MotionEvent event) {
@@ -219,6 +244,39 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         // invalidate is redundant if layout params are set or not needed if they are not set.
 //        mRrootLayout.invalidate();
         return true;
+              }
+        });
+        
+        
+
+    private String readFromFile(Context context) {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = context.openFileInput("RoomDatabase.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
     }
 
     @Override

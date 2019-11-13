@@ -118,7 +118,7 @@
         app:layout_constraintStart_toEndOf="@+id/bfloor1north"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+  <Button
         android:id="@+id/bfloor3north"
         android:layout_width="100dp"
         android:layout_height="50dp"
@@ -165,5 +165,30 @@
         android:text="CLEAR"
         app:layout_constraintStart_toEndOf="@+id/bfloor3south"
         app:layout_constraintTop_toBottomOf="@+id/bfloor4north" />
+    <EditText
+        android:id="@+id/searchBar"
+        android:layout_width="286dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginLeft="99dp"
+        android:ems="10"
+        android:hint="Room Number"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/searchButton"
+        android:layout_width="29dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginRight="27dp"
+        android:background="@android:color/background_light"
+        android:tint="@android:color/background_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
