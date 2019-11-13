@@ -9,90 +9,98 @@
     tools:showIn="@layout/activity_main"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/floor1north"
-        android:layout_width="300dp"
-        android:layout_height="627dp"
-        android:layout_marginEnd="38dp"
-        android:alpha="0"
-        android:contentDescription="@string/no_description"
-        android:rotation="-90"
-        android:scaleType="fitXY"
-        android:src="@drawable/floor1north"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <RelativeLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/floor2north"
-        android:layout_width="300dp"
-        android:layout_height="627dp"
-        android:layout_marginEnd="38dp"
-        android:alpha="0"
-        android:contentDescription="@string/no_description"
-        android:rotation="-90"
-        android:src="@drawable/floor2north"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/floor1north"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="38dp"
+            android:alpha="0"
+            android:contentDescription="@string/no_description"
+            android:rotation="-90"
+            android:scaleType="fitXY"
+            android:src="@drawable/floor1north"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
-        android:id="@+id/floor3north"
-        android:layout_width="300dp"
-        android:layout_height="627dp"
-        android:layout_marginEnd="38dp"
-        android:alpha="0"
-        android:contentDescription="@string/no_description"
-        android:rotation="-90"
-        android:src="@drawable/floor3north"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/floor2north"
+            android:layout_width="300dp"
+            android:layout_height="627dp"
+            android:layout_marginEnd="38dp"
+            android:alpha="0"
+            android:contentDescription="@string/no_description"
+            android:rotation="-90"
+            android:src="@drawable/floor2north"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
-        android:id="@+id/floor4north"
-        android:layout_width="300dp"
-        android:layout_height="627dp"
-        android:layout_marginEnd="38dp"
-        android:alpha="0"
-        android:contentDescription="@string/no_description"
-        android:rotation="-90"
-        android:src="@drawable/floor4north"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/floor3north"
+            android:layout_width="300dp"
+            android:layout_height="627dp"
+            android:layout_marginEnd="38dp"
+            android:alpha="0"
+            android:contentDescription="@string/no_description"
+            android:rotation="-90"
+            android:src="@drawable/floor3north"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
-        android:id="@+id/floor1south"
-        android:layout_width="300dp"
-        android:layout_height="627dp"
-        android:layout_marginEnd="38dp"
-        android:alpha="0"
-        android:contentDescription="@string/no_description"
-        android:rotation="-90"
-        android:src="@drawable/floor1south"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/floor4north"
+            android:layout_width="300dp"
+            android:layout_height="627dp"
+            android:layout_marginEnd="38dp"
+            android:alpha="0"
+            android:contentDescription="@string/no_description"
+            android:rotation="-90"
+            android:src="@drawable/floor4north"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
-        android:id="@+id/floor2south"
-        android:layout_width="300dp"
-        android:layout_height="627dp"
-        android:layout_marginEnd="38dp"
-        android:alpha="0"
-        android:contentDescription="@string/no_description"
-        android:rotation="-90"
-        android:src="@drawable/floor2south"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/floor1south"
+            android:layout_width="300dp"
+            android:layout_height="627dp"
+            android:layout_marginEnd="38dp"
+            android:alpha="0"
+            android:contentDescription="@string/no_description"
+            android:rotation="-90"
+            android:src="@drawable/floor1south"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
-        android:id="@+id/floor3south"
-        android:layout_width="300dp"
-        android:layout_height="627dp"
-        android:layout_marginEnd="38dp"
-        android:alpha="0"
-        android:contentDescription="@string/no_description"
-        android:rotation="-90"
-        android:src="@drawable/floor3south"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/floor2south"
+            android:layout_width="300dp"
+            android:layout_height="627dp"
+            android:layout_marginEnd="38dp"
+            android:alpha="0"
+            android:contentDescription="@string/no_description"
+            android:rotation="-90"
+            android:src="@drawable/floor2south"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/floor3south"
+            android:layout_width="300dp"
+            android:layout_height="627dp"
+            android:layout_marginEnd="38dp"
+            android:alpha="0"
+            android:contentDescription="@string/no_description"
+            android:rotation="-90"
+            android:src="@drawable/floor3south"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/bfloor1north"
