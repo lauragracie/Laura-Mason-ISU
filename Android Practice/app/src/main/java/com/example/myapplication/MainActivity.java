@@ -28,21 +28,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
-    Button bfloor1north;
-    Button bfloor2north;
-    Button bfloor3north;
-    Button bfloor4north;
-    Button bfloor1south;
-    Button bfloor2south;
-    Button bfloor3south;
+    Button bfloor1;
+    Button bfloor2;
+    Button bfloor3;
+    Button bfloor4;
+
     Button bclear;
-    ImageView floor1north;
-    ImageView floor2north;
-    ImageView floor3north;
-    ImageView floor4north;
-    ImageView floor1south;
-    ImageView floor2south;
-    ImageView floor3south;
+    ImageView floorimage;
+
     private ViewGroup rootlayout;
 
     int windowwidth;
@@ -63,31 +56,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         //Initialize buttons
         searchButton = (ImageButton)findViewById(R.id.searchButton);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        bfloor1north = findViewById(R.id.bfloor1north);
-        bfloor2north = findViewById(R.id.bfloor2north);
-        bfloor3north = findViewById(R.id.bfloor3north);
-        bfloor4north = findViewById(R.id.bfloor4north);
-        bfloor1south = findViewById(R.id.bfloor1south);
-        bfloor2south = findViewById(R.id.bfloor2south);
-        bfloor3south = findViewById(R.id.bfloor3south);
+        bfloor1 = findViewById(R.id.bfloor1);
+        bfloor2 = findViewById(R.id.bfloor2);
+        bfloor3 = findViewById(R.id.bfloor3);
+        bfloor4 = findViewById(R.id.bfloor4);
         bclear = findViewById(R.id.bclear);
 
-        floor1north = findViewById(R.id.floor1north);
-        floor2north = findViewById(R.id.floor2north);
-        floor3north = findViewById(R.id.floor3north);
-        floor4north = findViewById(R.id.floor4north);
-        floor1south = findViewById(R.id.floor1south);
-        floor2south = findViewById(R.id.floor2south);
-        floor3south = findViewById(R.id.floor3south);
+        floorimage = findViewById(R.id.floorimage);
 
-        floor1north.setOnTouchListener(this);
-        floor2north.setOnTouchListener(this);
-        floor3north.setOnTouchListener(this);
-        floor4north.setOnTouchListener(this);
-        floor1south.setOnTouchListener(this);
-        floor2south.setOnTouchListener(this);
-        floor3south.setOnTouchListener(this);
+        floorimage.setOnTouchListener(this);
+
+
 
         rootlayout = (ViewGroup) findViewById(R.id.root);
 
@@ -99,107 +78,38 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             }
         });
 
-        bfloor1north.setOnClickListener(new View.OnClickListener() {
+        bfloor1.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
-                floor1north.setAlpha(1.0f);
-                floor2north.setAlpha(0f);
-                floor3north.setAlpha(0f);
-                floor4north.setAlpha(0f);
-                floor1south.setAlpha(0f);
-                floor2south.setAlpha(0f);
-                floor3south.setAlpha(0f);
+                floorimage.setAlpha(1.0f);
+                floorimage.setImageResource(R.drawable.floor1);
             }
         });
 
-        bfloor2north.setOnClickListener(new View.OnClickListener() {
+        bfloor2.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
-                floor1north.setAlpha(0f);
-                floor2north.setAlpha(1.0f);
-                floor3north.setAlpha(0f);
-                floor4north.setAlpha(0f);
-                floor1south.setAlpha(0f);
-                floor2south.setAlpha(0f);
-                floor3south.setAlpha(0f);
+                floorimage.setAlpha(1.0f);
+                floorimage.setImageResource(R.drawable.floor2);
             }
         });
 
-        bfloor3north.setOnClickListener(new View.OnClickListener() {
+        bfloor3.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
-                floor1north.setAlpha(0f);
-                floor2north.setAlpha(0f);
-                floor3north.setAlpha(1.0f);
-                floor4north.setAlpha(0f);
-                floor1south.setAlpha(0f);
-                floor2south.setAlpha(0f);
-                floor3south.setAlpha(0f);
+                floorimage.setAlpha(1.0f);
+                floorimage.setImageResource(R.drawable.floor3);
             }
         });
 
-        bfloor4north.setOnClickListener(new View.OnClickListener() {
+        bfloor4.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
-                floor1north.setAlpha(0f);
-                floor2north.setAlpha(0f);
-                floor3north.setAlpha(0f);
-                floor4north.setAlpha(1.0f);
-                floor1south.setAlpha(0f);
-                floor2south.setAlpha(0f);
-                floor3south.setAlpha(0f);
+                floorimage.setAlpha(1.0f);
+                floorimage.setImageResource(R.drawable.floor4);
             }
         });
 
-        bfloor1south.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
-                floor1north.setAlpha(0f);
-                floor2north.setAlpha(0f);
-                floor3north.setAlpha(0f);
-                floor4north.setAlpha(0f);
-                floor1south.setAlpha(1.0f);
-                floor2south.setAlpha(0f);
-                floor3south.setAlpha(0f);
-            }
-        });
-
-        bfloor2south.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
-                floor1north.setAlpha(0f);
-                floor2north.setAlpha(0f);
-                floor3north.setAlpha(0f);
-                floor4north.setAlpha(0f);
-                floor1south.setAlpha(0f);
-                floor2south.setAlpha(1.0f);
-                floor3south.setAlpha(0f);
-            }
-        });
-
-        bfloor3south.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
-                floor1north.setAlpha(0f);
-                floor2north.setAlpha(0f);
-                floor3north.setAlpha(0f);
-                floor4north.setAlpha(0f);
-                floor1south.setAlpha(0f);
-                floor2south.setAlpha(0f);
-                floor3south.setAlpha(1.0f);
-            }
-        });
 
         bclear.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
-                floor1north.setAlpha(0f);
-                floor2north.setAlpha(0f);
-                floor3north.setAlpha(0f);
-                floor4north.setAlpha(0f);
-                floor1south.setAlpha(0f);
-                floor2south.setAlpha(0f);
-                floor3south.setAlpha(0f);
-            }
-        });
-
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                searchBar = (EditText)findViewById(R.id.searchBar);
-                mText = (TextView)findViewById(R.id.mText);
-                mText.setText("Room #: " +searchBar.getText().toString()+"!");
+                floorimage.setAlpha(0f);
             }
         });
 
@@ -244,8 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         // invalidate is redundant if layout params are set or not needed if they are not set.
 //        mRrootLayout.invalidate();
         return true;
-              }
-        });
+    }
         
         
 

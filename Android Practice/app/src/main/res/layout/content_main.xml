@@ -16,155 +16,73 @@
         tools:context=".MainActivity">
 
         <ImageView
-            android:id="@+id/floor1north"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/floorimage"
+            android:layout_width="415dp"
+            android:layout_height="295dp"
             android:layout_marginEnd="38dp"
             android:alpha="0"
             android:contentDescription="@string/no_description"
-            android:rotation="-90"
             android:scaleType="fitXY"
-            android:src="@drawable/floor1north"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageView
-            android:id="@+id/floor2north"
-            android:layout_width="300dp"
-            android:layout_height="627dp"
-            android:layout_marginEnd="38dp"
-            android:alpha="0"
-            android:contentDescription="@string/no_description"
-            android:rotation="-90"
-            android:src="@drawable/floor2north"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageView
-            android:id="@+id/floor3north"
-            android:layout_width="300dp"
-            android:layout_height="627dp"
-            android:layout_marginEnd="38dp"
-            android:alpha="0"
-            android:contentDescription="@string/no_description"
-            android:rotation="-90"
-            android:src="@drawable/floor3north"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageView
-            android:id="@+id/floor4north"
-            android:layout_width="300dp"
-            android:layout_height="627dp"
-            android:layout_marginEnd="38dp"
-            android:alpha="0"
-            android:contentDescription="@string/no_description"
-            android:rotation="-90"
-            android:src="@drawable/floor4north"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageView
-            android:id="@+id/floor1south"
-            android:layout_width="300dp"
-            android:layout_height="627dp"
-            android:layout_marginEnd="38dp"
-            android:alpha="0"
-            android:contentDescription="@string/no_description"
-            android:rotation="-90"
-            android:src="@drawable/floor1south"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageView
-            android:id="@+id/floor2south"
-            android:layout_width="300dp"
-            android:layout_height="627dp"
-            android:layout_marginEnd="38dp"
-            android:alpha="0"
-            android:contentDescription="@string/no_description"
-            android:rotation="-90"
-            android:src="@drawable/floor2south"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageView
-            android:id="@+id/floor3south"
-            android:layout_width="300dp"
-            android:layout_height="627dp"
-            android:layout_marginEnd="38dp"
-            android:alpha="0"
-            android:contentDescription="@string/no_description"
-            android:rotation="-90"
-            android:src="@drawable/floor3south"
+            android:src="@drawable/floor4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
     </RelativeLayout>
 
     <Button
-        android:id="@+id/bfloor1north"
+        android:id="@+id/bfloor1"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="100"
+        android:translationX="300dp"
+        android:translationY="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/bfloor2north"
+        android:id="@+id/bfloor2"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="200"
-        app:layout_constraintStart_toEndOf="@+id/bfloor1north"
+        android:translationX="300dp"
+        android:translationY="120dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-  <Button
-        android:id="@+id/bfloor3north"
+    <Button
+        android:id="@+id/bfloor3"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="300"
-        app:layout_constraintStart_toEndOf="@id/bfloor2north"
+        android:translationX="300dp"
+        android:translationY="180dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/bfloor4north"
+        android:id="@+id/bfloor4"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="400"
-        app:layout_constraintStart_toEndOf="@id/bfloor3north"
+        android:translationX="300dp"
+        android:translationY="240dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/bfloor1south"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="150"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bfloor1north" />
 
-    <Button
-        android:id="@+id/bfloor2south"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="250"
-        app:layout_constraintStart_toEndOf="@+id/bfloor1south"
-        app:layout_constraintTop_toBottomOf="@+id/bfloor2north" />
-
-    <Button
-        android:id="@+id/bfloor3south"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="350"
-        app:layout_constraintStart_toEndOf="@+id/bfloor2south"
-        app:layout_constraintTop_toBottomOf="@+id/bfloor3north" />
 
     <Button
         android:id="@+id/bclear"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="CLEAR"
-        app:layout_constraintStart_toEndOf="@+id/bfloor3south"
-        app:layout_constraintTop_toBottomOf="@+id/bfloor4north" />
+        android:translationX="300dp"
+        android:translationY="480dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
     <EditText
         android:id="@+id/searchBar"
         android:layout_width="286dp"
