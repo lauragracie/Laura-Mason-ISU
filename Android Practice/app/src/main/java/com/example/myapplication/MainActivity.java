@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -34,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     Button bfloor4;
 
     Button bclear;
+
+    Button bdirections;
+
     ImageView floorimage;
 
     private ViewGroup rootlayout;
@@ -61,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         bfloor3 = findViewById(R.id.bfloor3);
         bfloor4 = findViewById(R.id.bfloor4);
         bclear = findViewById(R.id.bclear);
+        bdirections = findViewById(R.id.bdirections);
 
         floorimage = findViewById(R.id.floorimage);
 
@@ -110,6 +116,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         bclear.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
                 floorimage.setAlpha(0f);
+            }
+        });
+
+        bdirections.setOnClickListener(new View.OnClickListener(){
+            public void onClick (View view){
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             }
         });
 
