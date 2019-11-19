@@ -1,16 +1,21 @@
 package com.example.myapplication;
 
 import android.content.res.AssetManager;
+import android.os.Build;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import android.widget.LinearLayout.LayoutParams;
 
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
+import android.widget.RelativeLayout;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -60,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //final ConstraintLayout constraintLayout = findViewById(R.id.parent);
 
         getDatabase(roomDatabase);
 
@@ -121,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         building= findViewById(R.id.building);
         floor = findViewById(R.id.floor);
         roomName = findViewById(R.id.roomName);
+        location.setAlpha(1.0f);
+
 
         searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -134,6 +142,9 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
 
+
+                roomNumber.setText("Searching");
+
                 int roomIndex = getRoomIndex(searchBar.getText().toString());
                 if(roomIndex != -1){
                     roomNumber.setText(roomDatabase[roomIndex][0]);
@@ -141,8 +152,20 @@ public class MainActivity extends AppCompatActivity {
                     floor.setText(roomDatabase[roomIndex][2]);
                     roomName.setText(roomDatabase[roomIndex][3]);
                     displayFloor(roomDatabase[roomIndex][2]);
+
                     location.setAlpha(1.0f);
+
+                    int[] mapXY = {0,0};
+                    floor1north.getLocationOnScreen(mapXY);
+                    View location = findViewById(R.id.location);
+                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)location.getLayoutParams();
+                    lp.leftMargin = (int)floor1north.getX();
+                    lp.topMargin = (int)floor1north.getY();
+                    //lp.rightMargin = 8;
+                    //lp.bottomMargin = -815;
+                    location.setLayoutParams(lp);
                 }
+
                 else{
                     roomNumber.setText("Couldn't find a room with that name");
                     building.setText("");
