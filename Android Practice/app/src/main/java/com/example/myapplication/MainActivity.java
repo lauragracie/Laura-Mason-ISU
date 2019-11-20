@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.InputType;
 import android.view.MotionEvent;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +21,6 @@ import android.widget.RelativeLayout;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import android.widget.ImageView;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -28,6 +30,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
     Button bfloor1;
@@ -51,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     ImageButton searchButton;
     EditText searchBar;
     TextView mText;
+
+    List<String> instructions = new ArrayList<String>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         bdirections.setOnClickListener(new View.OnClickListener(){
             public void onClick (View view){
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
             }
         });
 
@@ -167,8 +175,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 //        mRrootLayout.invalidate();
         return true;
     }
-        
-        
+
+    public ArrayList<String> generateInstructions (String start, String end) {
+
+    }
 
     private String readFromFile(Context context) {
 
