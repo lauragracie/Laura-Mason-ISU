@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+
+import android.content.res.AssetManager;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -15,11 +17,16 @@ import androidx.appcompat.widget.Toolbar;
 import android.text.InputType;
 import android.view.MotionEvent;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.widget.RelativeLayout;
 import android.view.MenuItem;
+
+import android.view.inputmethod.EditorInfo;
+
 import android.view.ViewGroup;
+
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.EditText;
@@ -44,6 +51,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     Button bdirections;
 
     ImageView floorimage;
+  
+    final int numRooms = 148;
+    final int numDataFields = 4;
+
+    ImageButton searchButton;
+    ImageButton clearButton;
+
+    ImageView location;
 
     private ViewGroup rootlayout;
 
@@ -53,8 +68,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private int _yDelta;
 
     ImageButton searchButton;
+
     EditText searchBar;
-    TextView mText;
+    TextView roomNumber;
+    TextView building;
+    TextView floor;
+    TextView roomName;
+
+    AssetManager assetManager;
+
+    String[][] roomDatabase = new String[numRooms][numDataFields];
 
     ArrayList<String> instructions = new ArrayList<String>();
 
@@ -67,8 +90,69 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getDatabase(roomDatabase);
+
         //Initialize buttons
-        searchButton = (ImageButton)findViewById(R.id.searchButton);
+
+        searchButton = findViewById(R.id.searchButton);
+        clearButton = findViewById(R.id.clearButton);
+        searchButton = findViewById(R.id.searchButton);
+
+
+        location = findViewById(R.id.location);
+
+        //Initialize text fields
+        searchBar = findViewById(R.id.searchBar);
+        roomNumber = findViewById(R.id.roomNumber);
+        building= findViewById(R.id.building);
+        floor = findViewById(R.id.floor);
+        roomName = findViewById(R.id.roomName);
+
+        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    searchButton.performClick();
+                }
+                return false;
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+
+                int roomIndex = getRoomIndex(searchBar.getText().toString());
+                if(roomIndex != -1){
+                    roomNumber.setText(roomDatabase[roomIndex][0]);
+                    building.setText(roomDatabase[roomIndex][1]);
+                    floor.setText(roomDatabase[roomIndex][2]);
+                    roomName.setText(roomDatabase[roomIndex][3]);
+                    displayFloor(roomDatabase[roomIndex][2]);
+                    location.setAlpha(1.0f);
+                }
+                else{
+                    roomNumber.setText("Couldn't find a room with that name");
+                    building.setText("");
+                    floor.setText("");
+                    roomName.setText("");
+                }
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                searchBar.getText().clear();
+            }
+        });
+
+        /*fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });*/
+    }
+
         bfloor1 = findViewById(R.id.bfloor1);
         bfloor2 = findViewById(R.id.bfloor2);
         bfloor3 = findViewById(R.id.bfloor3);
@@ -207,40 +291,82 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         String ret = "";
 
+    private boolean getDatabase(String[][] database) {
+        assetManager = getAssets();
+        //String input = "";
         try {
-            InputStream inputStream = context.openFileInput("RoomDatabase.txt");
+            InputStream inputStream = assetManager.open("RoomDatabase.txt");
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
-                    stringBuilder.append(receiveString);
+                for(int i = 0; i<numRooms; i++){
+                    //Read in list number of room, but don't process the data.
+                    bufferedReader.readLine();
+                    for(int j = 0; j<numDataFields; j++){
+                        if( (receiveString = bufferedReader.readLine()) != null ) {
+                            database[i][j] = receiveString;
+                        }
+                    }
+                    //Read in empty space between entries.
+                    bufferedReader.readLine();
                 }
 
                 inputStream.close();
-                ret = stringBuilder.toString();
+                //input = stringBuilder.toString();
             }
+            return true;
         }
         catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
+            return false;
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
+            return false;
         }
-
-        return ret;
     }
 
-    @Override
+    private int getRoomIndex(String n){
+        for(int j = 0; j < numRooms; j++){
+            if(n.compareToIgnoreCase(roomDatabase[j][0]) == 0|| n.compareToIgnoreCase(roomDatabase[j][3]) == 0){
+                if(!n.equals("N/A")){
+                    return j;
+                }
+            }
+        }
+        return -1;
+    }
+
+    private void displayFloor(String floor){
+        switch(floor){
+            case "1":
+                bfloor1north.performClick();
+                break;
+            case "2":
+                bfloor2north.performClick();
+                break;
+            case "3":
+                bfloor3north.performClick();
+                break;
+            case "4":
+                bfloor4north.performClick();
+                break;
+            default:
+                bfloor2north.performClick();
+                break;
+        }
+    }
+
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -253,5 +379,5 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }
