@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     EditText searchBar;
     TextView mText;
 
-    List<String> instructions = new ArrayList<String>();
+    ArrayList<String> instructions = new ArrayList<String>();
 
 
 
@@ -177,7 +177,30 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     public ArrayList<String> generateInstructions (String start, String end) {
+        ArrayList<String> instructions = new ArrayList<String>();
 
+        int startIndex = getRoomIndex(start);
+        int endIndex = getRoomIndex(end);
+
+        if (startIndex == -1 || endIndex == -1) {
+            instructions.add("target room does not exist");
+            return instructions;
+        }
+
+        if ((roomDatabase[startIndex][1] != roomDatabase[endIndex][1]) & roomDatabase[endIndex][1] != "N/A") {
+            instructions.add("Go to the " + roomDatabase[endIndex][1] + " building.");
+        }
+        else if (roomDatabase[endIndex][1] = "N/A") {
+            instructions.add("Exit the building.");
+        }
+
+        if (roomDatabase[endIndex][2] = "N/A") {
+            instructions.add("Go to floor " + roomDatabase[endIndex][2]);
+        }
+
+        instructions.add("Go to Room " + roomDatabase[endIndex][0]);
+
+        return instructions;
     }
 
     private String readFromFile(Context context) {
