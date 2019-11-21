@@ -67,8 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private int _xDelta;
     private int _yDelta;
 
-    ImageButton searchButton;
-
     EditText searchBar;
     TextView roomNumber;
     TextView building;
@@ -98,7 +96,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         clearButton = findViewById(R.id.clearButton);
         searchButton = findViewById(R.id.searchButton);
 
+        bfloor1 = findViewById(R.id.bfloor1);
+        bfloor2 = findViewById(R.id.bfloor2);
+        bfloor3 = findViewById(R.id.bfloor3);
+        bfloor4 = findViewById(R.id.bfloor4);
+        bclear = findViewById(R.id.bclear);
+        bdirections = findViewById(R.id.bdirections);
 
+        floorimage = findViewById(R.id.floorimage);
+
+        floorimage.setOnTouchListener(this);
         location = findViewById(R.id.location);
 
         //Initialize text fields
@@ -108,6 +115,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         floor = findViewById(R.id.floor);
         roomName = findViewById(R.id.roomName);
 
+        rootlayout = (ViewGroup) findViewById(R.id.root);
+
+        rootlayout.post(new Runnable() {
+            @Override
+            public void run() {
+                windowwidth = rootlayout.getWidth();
+                windowheight = rootlayout.getHeight();
+            }
+        });
         searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
@@ -151,30 +167,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         .setAction("Action", null).show();
             }
         });*/
-    }
-
-        bfloor1 = findViewById(R.id.bfloor1);
-        bfloor2 = findViewById(R.id.bfloor2);
-        bfloor3 = findViewById(R.id.bfloor3);
-        bfloor4 = findViewById(R.id.bfloor4);
-        bclear = findViewById(R.id.bclear);
-        bdirections = findViewById(R.id.bdirections);
-
-        floorimage = findViewById(R.id.floorimage);
-
-        floorimage.setOnTouchListener(this);
-
-
-
-        rootlayout = (ViewGroup) findViewById(R.id.root);
-
-        rootlayout.post(new Runnable() {
-            @Override
-            public void run() {
-                windowwidth = rootlayout.getWidth();
-                windowheight = rootlayout.getHeight();
-            }
-        });
 
         bfloor1.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
@@ -274,11 +266,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         if ((roomDatabase[startIndex][1] != roomDatabase[endIndex][1]) & roomDatabase[endIndex][1] != "N/A") {
             instructions.add("Go to the " + roomDatabase[endIndex][1] + " building.");
         }
-        else if (roomDatabase[endIndex][1] = "N/A") {
+        else if (roomDatabase[endIndex][1] == "N/A") {
             instructions.add("Exit the building.");
         }
 
-        if (roomDatabase[endIndex][2] = "N/A") {
+        if (roomDatabase[endIndex][2] == "N/A") {
             instructions.add("Go to floor " + roomDatabase[endIndex][2]);
         }
 
@@ -287,9 +279,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         return instructions;
     }
 
-    private String readFromFile(Context context) {
-
-        String ret = "";
 
     private boolean getDatabase(String[][] database) {
         assetManager = getAssets();
@@ -342,19 +331,19 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private void displayFloor(String floor){
         switch(floor){
             case "1":
-                bfloor1north.performClick();
+                bfloor1.performClick();
                 break;
             case "2":
-                bfloor2north.performClick();
+                bfloor2.performClick();
                 break;
             case "3":
-                bfloor3north.performClick();
+                bfloor3.performClick();
                 break;
             case "4":
-                bfloor4north.performClick();
+                bfloor4.performClick();
                 break;
             default:
-                bfloor2north.performClick();
+                bfloor2.performClick();
                 break;
         }
     }
