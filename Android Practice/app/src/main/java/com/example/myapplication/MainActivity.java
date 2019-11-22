@@ -33,8 +33,8 @@ import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
   
-    final int numRooms = 148;
-    final int numDataFields = 4;
+    final int numRooms = 146;
+    final int numDataFields = 6;
 
     Button bfloor1north;
     Button bfloor2north;
@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //final ConstraintLayout constraintLayout = findViewById(R.id.parent);
 
         getDatabase(roomDatabase);
 
@@ -127,8 +126,6 @@ public class MainActivity extends AppCompatActivity {
         building= findViewById(R.id.building);
         floor = findViewById(R.id.floor);
         roomName = findViewById(R.id.roomName);
-        location.setAlpha(1.0f);
-
 
         searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -142,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
 
-
                 roomNumber.setText("Searching");
 
                 int roomIndex = getRoomIndex(searchBar.getText().toString());
@@ -155,18 +151,28 @@ public class MainActivity extends AppCompatActivity {
 
                     location.setAlpha(1.0f);
 
+                    bfloor1north.setAlpha(0.0f);
+                    bfloor2north.setAlpha(0.0f);
+                    bfloor3north.setAlpha(0.0f);
+                    bfloor4north.setAlpha(0.0f);
+
                     int[] mapXY = {0,0};
                     floor1north.getLocationOnScreen(mapXY);
                     View location = findViewById(R.id.location);
                     RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)location.getLayoutParams();
-                    lp.leftMargin = (int)floor1north.getX();
-                    lp.topMargin = (int)floor1north.getY();
+                    //int floorX = (int)floor1north.getX();
+                    //String floorN = roomDatabase[roomIndex][2];
+                    int floorX = getFloorX(roomDatabase[roomIndex][2]);
+                    int floorY = getFloorY(roomDatabase[roomIndex][2]);
+                    lp.leftMargin = floorX + Integer.parseInt(roomDatabase[roomIndex][4]);
+                    lp.topMargin = floorY + Integer.parseInt(roomDatabase[roomIndex][5]);
                     //lp.rightMargin = 8;
                     //lp.bottomMargin = -815;
                     location.setLayoutParams(lp);
                 }
 
                 else{
+                    location.setAlpha(0.0f);
                     roomNumber.setText("Couldn't find a room with that name");
                     building.setText("");
                     floor.setText("");
@@ -178,16 +184,10 @@ public class MainActivity extends AppCompatActivity {
         clearButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 searchBar.getText().clear();
+                location.setAlpha(0.0f);
             }
         });
 
-        /*fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
     }
 
     private boolean getDatabase(String[][] database) {
@@ -258,25 +258,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }*/
-
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    private int getFloorX(String floor){
+        switch(floor){
+            case "1":
+                return (int)floor1north.getX();
+            case "2":
+                return (int)floor2north.getX();
+            case "3":
+                return (int)floor3north.getX();
+            case "4":
+                return (int)floor4north.getX();
+            default:
+                return (int)floor2north.getX();
         }
+    }
 
-        return super.onOptionsItemSelected(item);
-    }*/
+    private int getFloorY(String floor){
+        switch(floor){
+            case "1":
+                return (int)floor1north.getY();
+            case "2":
+                return (int)floor2north.getY();
+            case "3":
+                return (int)floor3north.getY();
+            case "4":
+                return (int)floor4north.getY();
+            default:
+                return (int)floor2north.getY();
+        }
+    }
 }

@@ -60,29 +60,30 @@
         android:alpha="1"
         android:contentDescription="@string/no_description"
         android:scaleType="fitXY"
-        android:src="@drawable/floor1"
+        android:src="@drawable/floor11"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/floor1" />
+        app:srcCompat="@drawable/floor11" />
 
     <ImageView
         android:id="@+id/floor2north"
-        android:layout_width="300dp"
-        android:layout_height="627dp"
+        android:layout_width="415dp"
+        android:layout_height="311dp"
+        android:layout_marginBottom="148dp"
         android:alpha="0"
         android:contentDescription="@string/no_description"
-        android:rotation="-90"
         android:src="@drawable/floor2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/floor2" />
 
     <ImageView
         android:id="@+id/floor3north"
-        android:layout_width="300dp"
-        android:layout_height="627dp"
-        android:layout_marginEnd="38dp"
+        android:layout_width="415dp"
+        android:layout_height="311dp"
+        android:layout_marginBottom="148dp"
         android:alpha="0"
         android:contentDescription="@string/no_description"
-        android:rotation="-90"
         android:src="@drawable/floor3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,21 +91,14 @@
 
     <ImageView
         android:id="@+id/floor4north"
-        android:layout_width="300dp"
-        android:layout_height="627dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="38dp"
+        android:layout_width="415dp"
+        android:layout_height="134dp"
+        android:layout_marginBottom="300dp"
         android:alpha="0"
         android:contentDescription="@string/no_description"
-        android:rotation="-90"
         android:src="@drawable/floor4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/clearButton"
-        app:layout_constraintTop_toBottomOf="@+id/searchBar"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/floor4" />
 
     <Button
@@ -182,10 +176,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
+
         <ImageView
             android:id="@+id/location"
-            android:layout_width="37dp"
-            android:layout_height="42dp"
+            android:layout_width="17dp"
+            android:layout_height="20dp"
             android:alpha="0.0"
             app:srcCompat="@drawable/floor_location"
             tools:layout_editor_absoluteX="374dp"
