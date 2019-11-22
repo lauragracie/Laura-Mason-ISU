@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     ArrayList<String> instructions = new ArrayList<String>();
 
-
+    boolean displayRoom = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +119,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         floor = findViewById(R.id.floor);
         roomName = findViewById(R.id.roomName);
 
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) floorimage.getLayoutParams();
+        lp.topMargin = 400;
+        floorimage.setLayoutParams(lp);
+
         searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
@@ -142,20 +146,19 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     displayFloor(roomDatabase[roomIndex][2]);
 
                     location.setAlpha(1.0f);
+                    displayRoom = true;
 
                     View location = findViewById(R.id.location);
                     RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) location.getLayoutParams();
-                    //int floorX = (int)floor1north.getX();
-                    //String floorN = roomDatabase[roomIndex][2];
                     int floorX = getFloorX(roomDatabase[roomIndex][2]);
                     int floorY = getFloorY(roomDatabase[roomIndex][2]);
                     lp.leftMargin = floorX + Integer.parseInt(roomDatabase[roomIndex][4]);
                     lp.topMargin = floorY + Integer.parseInt(roomDatabase[roomIndex][5]);
-                    //lp.rightMargin = 8;
-                    //lp.bottomMargin = -815;
                     location.setLayoutParams(lp);
+
                 } else {
                     location.setAlpha(0.0f);
+                    displayRoom = false;
                     roomNumber.setText("Couldn't find a room with that name");
                     building.setText("");
                     floor.setText("");
@@ -168,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             public void onClick(View view) {
                 searchBar.getText().clear();
                 location.setAlpha(0.0f);
+                displayRoom = false;
             }
         });
 
@@ -189,6 +193,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
                 floorimage.setImageResource(R.drawable.floor1);
+                if(displayRoom){
+                    int roomIndex = getRoomIndex(searchBar.getText().toString());
+                    if(roomDatabase[roomIndex][2].compareTo("1") == 0){
+                        location.setAlpha(1.0f);
+                        displayRoom = true;
+                    }
+                    else{
+                        location.setAlpha(0.0f);
+                        //displayRoom = false;
+                    }
+                }
             }
         });
 
@@ -196,6 +211,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
                 floorimage.setImageResource(R.drawable.floor2);
+                if(displayRoom){
+                    int roomIndex = getRoomIndex(searchBar.getText().toString());
+                    if(roomDatabase[roomIndex][2].compareTo("2") == 0){
+                        location.setAlpha(1.0f);
+                        displayRoom = true;
+                    }
+                    else{
+                        location.setAlpha(0.0f);
+                        //displayRoom = false;
+                    }
+                }
             }
         });
 
@@ -203,6 +229,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
                 floorimage.setImageResource(R.drawable.floor3);
+                if(displayRoom){
+                    int roomIndex = getRoomIndex(searchBar.getText().toString());
+                    if(roomDatabase[roomIndex][2].compareTo("3") == 0){
+                        location.setAlpha(1.0f);
+                        displayRoom = true;
+                    }
+                    else{
+                        location.setAlpha(0.0f);
+                        //displayRoom = false;
+                    }
+                }
             }
         });
 
@@ -210,6 +247,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
                 floorimage.setImageResource(R.drawable.floor4);
+                if(displayRoom){
+                    int roomIndex = getRoomIndex(searchBar.getText().toString());
+                    if(roomDatabase[roomIndex][2].compareTo("4") == 0){
+                        location.setAlpha(1.0f);
+                        displayRoom = true;
+                    }
+                    else{
+                        location.setAlpha(0.0f);
+                        //displayRoom = false;
+                    }
+                }
             }
         });
 
@@ -217,6 +265,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         bclear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 floorimage.setAlpha(0f);
+                location.setAlpha(0f);
+                displayRoom = false;
             }
         });
 
@@ -261,6 +311,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 lp.rightMargin = view.getWidth() - lp.leftMargin - windowwidth;
                 lp.bottomMargin = view.getHeight() - lp.topMargin - windowheight;
                 view.setLayoutParams(lp);
+
+                if(displayRoom){
+                    View location = findViewById(R.id.location);
+                    RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams) location.getLayoutParams();
+                    int roomIndex = getRoomIndex(searchBar.getText().toString());
+                    int floorX = getFloorX(roomDatabase[roomIndex][2]);
+                    int floorY = getFloorY(roomDatabase[roomIndex][2]);
+                    lp2.leftMargin = floorX + Integer.parseInt(roomDatabase[roomIndex][4]);
+                    lp2.topMargin = floorY + Integer.parseInt(roomDatabase[roomIndex][5]);
+                    location.setLayoutParams(lp2);
+                }
                 break;
         }
         // invalidate is redundant if layout params are set or not needed if they are not set.

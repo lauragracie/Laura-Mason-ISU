@@ -75,12 +75,11 @@
         android:id="@+id/bfloor1"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginTop="44dp"
         android:text="100"
         android:translationX="300dp"
-        android:translationY="60dp"
+        android:translationY="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/bfloor2"
@@ -88,7 +87,7 @@
         android:layout_height="50dp"
         android:text="200"
         android:translationX="300dp"
-        android:translationY="120dp"
+        android:translationY="90dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,7 +97,7 @@
         android:layout_height="50dp"
         android:text="300"
         android:translationX="300dp"
-        android:translationY="180dp"
+        android:translationY="140dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,7 +107,7 @@
         android:layout_height="50dp"
         android:text="400"
         android:translationX="300dp"
-        android:translationY="240dp"
+        android:translationY="190dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -158,15 +157,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_search" />
 
-
-    <Button
-        android:id="@+id/bfloor1north"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="44dp"
-        android:text="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/clearButton"
