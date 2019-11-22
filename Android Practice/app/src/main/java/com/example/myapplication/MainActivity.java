@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     Button bfloor3;
     Button bfloor4;
 
-    Button bclear;
-
     Button bdirections;
 
     ImageView floorimage;
@@ -101,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         bfloor2 = findViewById(R.id.bfloor2);
         bfloor3 = findViewById(R.id.bfloor3);
         bfloor4 = findViewById(R.id.bfloor4);
-        bclear = findViewById(R.id.bclear);
         bdirections = findViewById(R.id.bdirections);
 
         floorimage = findViewById(R.id.floorimage);
@@ -119,8 +116,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         rootlayout = (ViewGroup) findViewById(R.id.root);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        final AlertDialog alertDialog = builder.create();
 
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -146,28 +141,33 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 int toRoomIndex = getRoomIndex(to);
                 int fromRoomIndex = getRoomIndex(from);
                 if(toRoomIndex != -1){
-                    roomNumber.setText(roomDatabase[toRoomIndex][0]);
-                    building.setText(roomDatabase[toRoomIndex][1]);
-                    floor.setText(roomDatabase[toRoomIndex][2]);
-                    roomName.setText(roomDatabase[toRoomIndex][3]);
                     displayFloor(roomDatabase[toRoomIndex][2]);
                     location.setAlpha(1.0f);
                 }
                 else{
-                    roomNumber.setText("Couldn't find a room with that name");
-                    building.setText("");
-                    floor.setText("");
-                    roomName.setText("");
+
                 }
-                alertDialog.dismiss();
+                instructions.clear();
+                instructions = generateInstructions(from, to);
+
+                roomNumber.setText("");
+                for (int i = 0; i < instructions.size(); i++) {
+                    roomNumber.append((i + 1) + ". ");
+                    roomNumber.append(instructions.get(i));
+                    roomNumber.append("\n");
+                }
+
+                dialog.dismiss();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                alertDialog.dismiss();
+                dialog.dismiss();
             }
         });
+
+        final AlertDialog alertDialog = builder.create();
 
         rootlayout.post(new Runnable() {
             @Override
@@ -249,13 +249,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             }
         });
 
-
-        bclear.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
-                floorimage.setAlpha(0f);
-            }
-        });
-
         bdirections.setOnClickListener(new View.OnClickListener(){
             public void onClick (View view){
                 alertDialog.show();
@@ -312,14 +305,28 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             return instructions;
         }
 
-        if ((roomDatabase[startIndex][1] != roomDatabase[endIndex][1]) & roomDatabase[endIndex][1] != "N/A") {
-            instructions.add("Go to the " + roomDatabase[endIndex][1] + " building.");
+        if (!roomDatabase[startIndex][1].equals(roomDatabase[endIndex][1]) & !roomDatabase[endIndex][1].equals("N/A")) {
+            String size;
+
+            switch (roomDatabase[endIndex][1]) {
+                case "North":
+                    size = "large";
+                    break;
+                case "South":
+                    size = "small";
+                    break;
+                default:
+                    size = "N/A";
+            }
+
+            instructions.add("Go to the " + roomDatabase[endIndex][1] + " (" + size + ") building.");
         }
-        else if (roomDatabase[endIndex][1] == "N/A") {
+        else if (roomDatabase[endIndex][1].equals("N/A")) {
             instructions.add("Exit the building.");
+            instructions.add("Go to the parking lot");
         }
 
-        if (roomDatabase[endIndex][2] == "N/A") {
+        if (!roomDatabase[endIndex][2].equals("N/A")) {
             instructions.add("Go to floor " + roomDatabase[endIndex][2]);
         }
 
