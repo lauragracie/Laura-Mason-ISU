@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     ImageButton searchButton;
     ImageButton clearButton;
 
+
     ImageView location;
 
     private ViewGroup rootlayout;
@@ -70,8 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     int windowheight;
     private int _xDelta;
     private int _yDelta;
-
-    ImageButton searchButton;
 
     EditText searchBar;
     TextView roomNumber;
@@ -102,13 +101,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         clearButton = findViewById(R.id.clearButton);
         searchButton = findViewById(R.id.searchButton);
 
+        bfloor1 = findViewById(R.id.bfloor1);
+        bfloor2 = findViewById(R.id.bfloor2);
+        bfloor3 = findViewById(R.id.bfloor3);
+        bfloor4 = findViewById(R.id.bfloor4);
+        bclear = findViewById(R.id.bclear);
+        bdirections = findViewById(R.id.bdirections);
+
+        floorimage = findViewById(R.id.floorimage);
 
         location = findViewById(R.id.location);
 
         //Initialize text fields
         searchBar = findViewById(R.id.searchBar);
         roomNumber = findViewById(R.id.roomNumber);
-        building= findViewById(R.id.building);
+        building = findViewById(R.id.building);
         floor = findViewById(R.id.floor);
         roomName = findViewById(R.id.roomName);
 
@@ -122,12 +129,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
 
         searchButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
 
                 roomNumber.setText("Searching");
 
                 int roomIndex = getRoomIndex(searchBar.getText().toString());
-                if(roomIndex != -1){
+                if (roomIndex != -1) {
                     roomNumber.setText(roomDatabase[roomIndex][0]);
                     building.setText(roomDatabase[roomIndex][1]);
                     floor.setText(roomDatabase[roomIndex][2]);
@@ -136,15 +143,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
                     location.setAlpha(1.0f);
 
-                    bfloor1north.setAlpha(0.0f);
-                    bfloor2north.setAlpha(0.0f);
-                    bfloor3north.setAlpha(0.0f);
-                    bfloor4north.setAlpha(0.0f);
-
-                    int[] mapXY = {0,0};
-                    floor1north.getLocationOnScreen(mapXY);
                     View location = findViewById(R.id.location);
-                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)location.getLayoutParams();
+                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) location.getLayoutParams();
                     //int floorX = (int)floor1north.getX();
                     //String floorN = roomDatabase[roomIndex][2];
                     int floorX = getFloorX(roomDatabase[roomIndex][2]);
@@ -154,9 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     //lp.rightMargin = 8;
                     //lp.bottomMargin = -815;
                     location.setLayoutParams(lp);
-                }
-
-                else{
+                } else {
                     location.setAlpha(0.0f);
                     roomNumber.setText("Couldn't find a room with that name");
                     building.setText("");
@@ -167,25 +165,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
 
         clearButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 searchBar.getText().clear();
                 location.setAlpha(0.0f);
             }
         });
 
-    }
-
-        bfloor1 = findViewById(R.id.bfloor1);
-        bfloor2 = findViewById(R.id.bfloor2);
-        bfloor3 = findViewById(R.id.bfloor3);
-        bfloor4 = findViewById(R.id.bfloor4);
-        bclear = findViewById(R.id.bclear);
-        bdirections = findViewById(R.id.bdirections);
-
-        floorimage = findViewById(R.id.floorimage);
 
         floorimage.setOnTouchListener(this);
-
 
 
         rootlayout = (ViewGroup) findViewById(R.id.root);
@@ -199,28 +186,28 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
 
         bfloor1.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
                 floorimage.setImageResource(R.drawable.floor1);
             }
         });
 
         bfloor2.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
                 floorimage.setImageResource(R.drawable.floor2);
             }
         });
 
         bfloor3.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
                 floorimage.setImageResource(R.drawable.floor3);
             }
         });
 
         bfloor4.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
                 floorimage.setImageResource(R.drawable.floor4);
             }
@@ -228,17 +215,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
 
         bclear.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floorimage.setAlpha(0f);
             }
         });
 
-        bdirections.setOnClickListener(new View.OnClickListener(){
-            public void onClick (View view){
+        bdirections.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
 
             }
         });
-
     }
 
     public boolean onTouch(View view, MotionEvent event) {
@@ -296,11 +282,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         if ((roomDatabase[startIndex][1] != roomDatabase[endIndex][1]) & roomDatabase[endIndex][1] != "N/A") {
             instructions.add("Go to the " + roomDatabase[endIndex][1] + " building.");
         }
-        else if (roomDatabase[endIndex][1] = "N/A") {
+        else if (roomDatabase[endIndex][1] == "N/A") {
             instructions.add("Exit the building.");
         }
 
-        if (roomDatabase[endIndex][2] = "N/A") {
+        if (roomDatabase[endIndex][2] == "N/A") {
             instructions.add("Go to floor " + roomDatabase[endIndex][2]);
         }
 
@@ -309,11 +295,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         return instructions;
     }
 
-    private String readFromFile(Context context) {
 
-        String ret = "";
-
-    private boolean getDatabase(String[][] database) {
+    private boolean getDatabase(String[][] roomDatabase) {
         assetManager = getAssets();
         //String input = "";
         try {
@@ -329,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     bufferedReader.readLine();
                     for(int j = 0; j<numDataFields; j++){
                         if( (receiveString = bufferedReader.readLine()) != null ) {
-                            database[i][j] = receiveString;
+                            roomDatabase[i][j] = receiveString;
                         }
                     }
                     //Read in empty space between entries.
@@ -364,27 +347,28 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private void displayFloor(String floor){
         switch(floor){
             case "1":
-                bfloor1north.performClick();
+                bfloor1.performClick();
                 break;
             case "2":
-                bfloor2north.performClick();
+                bfloor2.performClick();
                 break;
             case "3":
-                bfloor3north.performClick();
+                bfloor3.performClick();
                 break;
             case "4":
-                bfloor4north.performClick();
+                bfloor4.performClick();
                 break;
             default:
-                bfloor2north.performClick();
+                bfloor2.performClick();
                 break;
         }
     }
 
     private int getFloorX(String floor){
-        switch(floor){
+        return (int)floorimage.getX();
+        /*switch(floor){
             case "1":
-                return (int)floor1north.getX();
+                return (int)floorimage.getX();
             case "2":
                 return (int)floor2north.getX();
             case "3":
@@ -393,11 +377,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 return (int)floor4north.getX();
             default:
                 return (int)floor2north.getX();
-        }
+        }*/
     }
 
     private int getFloorY(String floor){
-        switch(floor){
+        return (int)floorimage.getY();
+        /*switch(floor){
             case "1":
                 return (int)floor1north.getY();
             case "2":
@@ -408,6 +393,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 return (int)floor4north.getY();
             default:
                 return (int)floor2north.getY();
-        }
+        }*/
     }
 }
