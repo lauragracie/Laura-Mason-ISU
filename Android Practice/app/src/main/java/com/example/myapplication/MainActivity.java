@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.view.MenuItem;
 
@@ -117,6 +118,57 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         rootlayout = (ViewGroup) findViewById(R.id.root);
 
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        final AlertDialog alertDialog = builder.create();
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final EditText aFrom = new EditText(this);
+        aFrom.setHint("From");
+        layout.addView(aFrom);
+
+        final EditText aTo = new EditText(this);
+        aTo.setHint("To");
+        layout.addView(aTo);
+
+        builder.setView(layout);
+
+        builder.setTitle("Title");
+        builder.setMessage("Message");
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String from = aFrom.getText().toString();
+                String to = aTo.getText().toString();
+                int toRoomIndex = getRoomIndex(to);
+                int fromRoomIndex = getRoomIndex(from);
+                if(toRoomIndex != -1){
+                    roomNumber.setText(roomDatabase[toRoomIndex][0]);
+                    building.setText(roomDatabase[toRoomIndex][1]);
+                    floor.setText(roomDatabase[toRoomIndex][2]);
+                    roomName.setText(roomDatabase[toRoomIndex][3]);
+                    displayFloor(roomDatabase[toRoomIndex][2]);
+                    location.setAlpha(1.0f);
+                }
+                else{
+                    roomNumber.setText("Couldn't find a room with that name");
+                    building.setText("");
+                    floor.setText("");
+                    roomName.setText("");
+                }
+                alertDialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+
         rootlayout.post(new Runnable() {
             @Override
             public void run() {
@@ -168,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             }
         });*/
 
+        // Set up actions for all the buttons
         bfloor1.setOnClickListener(new View.OnClickListener() {
             public void onClick (View view){
                 floorimage.setAlpha(1.0f);
@@ -205,12 +258,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         bdirections.setOnClickListener(new View.OnClickListener(){
             public void onClick (View view){
-
+                alertDialog.show();
             }
         });
 
     }
 
+    //Function for moving the map display around
     public boolean onTouch(View view, MotionEvent event) {
 
         final int X = (int) event.getRawX();
@@ -229,7 +283,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             case MotionEvent.ACTION_MOVE:
                 RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) view
                         .getLayoutParams();
-                // Image is centered to start, but we need to unhitch it to move it around.
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                     lp.removeRule(RelativeLayout.CENTER_HORIZONTAL);
                     lp.removeRule(RelativeLayout.CENTER_VERTICAL);
@@ -239,19 +292,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 }
                 lp.leftMargin = X - _xDelta;
                 lp.topMargin = Y - _yDelta;
-                // Negative margins here ensure that we can move off the screen to the right
-                // and on the bottom. Comment these lines out and you will see that
-                // the image will be hemmed in on the right and bottom and will actually shrink.
                 lp.rightMargin = view.getWidth() - lp.leftMargin - windowwidth;
                 lp.bottomMargin = view.getHeight() - lp.topMargin - windowheight;
                 view.setLayoutParams(lp);
                 break;
         }
-        // invalidate is redundant if layout params are set or not needed if they are not set.
-//        mRrootLayout.invalidate();
         return true;
     }
 
+    //Function that generates a simple list of instructions to arrive at your destination
     public ArrayList<String> generateInstructions (String start, String end) {
         ArrayList<String> instructions = new ArrayList<String>();
 
