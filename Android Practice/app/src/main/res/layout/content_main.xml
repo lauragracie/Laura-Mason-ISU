@@ -138,16 +138,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/bclear"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="CLEAR"
-        android:translationX="300dp"
-        android:translationY="480dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <Button
         android:id="@+id/bdirections"
@@ -195,14 +185,5 @@
         android:src="@android:drawable/btn_dialog"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <RelativeLayout
-        android:id="@+id/root"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
-
-
-    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

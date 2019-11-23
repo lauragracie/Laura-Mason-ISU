@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.view.MenuItem;
 
@@ -50,8 +51,6 @@ public class MainActivity extends AppCompatActivity{
     Button bfloor2;
     Button bfloor3;
     Button bfloor4;
-
-    Button bclear;
 
     Button bdirections;
 
@@ -106,11 +105,11 @@ public class MainActivity extends AppCompatActivity{
         bfloor2 = findViewById(R.id.bfloor2);
         bfloor3 = findViewById(R.id.bfloor3);
         bfloor4 = findViewById(R.id.bfloor4);
-        bclear = findViewById(R.id.bclear);
         bdirections = findViewById(R.id.bdirections);
 
         floorimage = findViewById(R.id.floorimage);
 
+        floorimage.setOnTouchListener(this);
         location = findViewById(R.id.location);
 
         //Initialize text fields
@@ -120,6 +119,71 @@ public class MainActivity extends AppCompatActivity{
         floor = findViewById(R.id.floor);
         roomName = findViewById(R.id.roomName);
 
+
+        rootlayout = (ViewGroup) findViewById(R.id.root);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final EditText aFrom = new EditText(this);
+        aFrom.setHint("From");
+        layout.addView(aFrom);
+
+        final EditText aTo = new EditText(this);
+        aTo.setHint("To");
+        layout.addView(aTo);
+
+        builder.setView(layout);
+
+        builder.setTitle("Title");
+        builder.setMessage("Message");
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String from = aFrom.getText().toString();
+                String to = aTo.getText().toString();
+                int toRoomIndex = getRoomIndex(to);
+                int fromRoomIndex = getRoomIndex(from);
+                if(toRoomIndex != -1){
+                    displayFloor(roomDatabase[toRoomIndex][2]);
+                    location.setAlpha(1.0f);
+                }
+                else{
+
+                }
+                instructions.clear();
+                instructions = generateInstructions(from, to);
+
+                roomNumber.setText("");
+                for (int i = 0; i < instructions.size(); i++) {
+                    roomNumber.append((i + 1) + ". ");
+                    roomNumber.append(instructions.get(i));
+                    roomNumber.append("\n");
+                }
+
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        final AlertDialog alertDialog = builder.create();
+
+        rootlayout.post(new Runnable() {
+            @Override
+            public void run() {
+                windowwidth = rootlayout.getWidth();
+                windowheight = rootlayout.getHeight();
+            }
+        });
+      
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) floorimage.getLayoutParams();
         lp.topMargin = 100;
         lp.bottomMargin = 200;
@@ -190,11 +254,7 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
-        //floorimage.setOnTouchListener(this);
-
-
         rootlayout = (ViewGroup) findViewById(R.id.root);
-
         rootlayout.post(new Runnable() {
             @Override
             public void run() {
@@ -203,6 +263,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        // Set up actions for all the buttons
         bfloor1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
@@ -276,23 +337,16 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
-        bclear.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                floorimage.setAlpha(0f);
-                location.setAlpha(0f);
-                displayRoom = false;
+        bdirections.setOnClickListener(new View.OnClickListener(){
+            public void onClick (View view){
+                alertDialog.show();
             }
         });
-
-        bdirections.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-
-            }
-        });
+      
     }
 
-    /*public boolean onTouch(View view, MotionEvent event) {
 
+    /*public boolean onTouch(View view, MotionEvent event) {
         final int X = (int) event.getRawX();
         final int Y = (int) event.getRawY();
 
@@ -309,7 +363,6 @@ public class MainActivity extends AppCompatActivity{
             case MotionEvent.ACTION_MOVE:
                 RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) view
                         .getLayoutParams();
-                // Image is centered to start, but we need to unhitch it to move it around.
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                     lp.removeRule(RelativeLayout.CENTER_HORIZONTAL);
                     lp.removeRule(RelativeLayout.CENTER_VERTICAL);
@@ -319,9 +372,6 @@ public class MainActivity extends AppCompatActivity{
                 }
                 lp.leftMargin = X - _xDelta;
                 lp.topMargin = Y - _yDelta;
-                // Negative margins here ensure that we can move off the screen to the right
-                // and on the bottom. Comment these lines out and you will see that
-                // the image will be hemmed in on the right and bottom and will actually shrink.
                 lp.rightMargin = view.getWidth() - lp.leftMargin - windowwidth;
                 lp.bottomMargin = view.getHeight() - lp.topMargin - windowheight;
                 view.setLayoutParams(lp);
@@ -338,11 +388,10 @@ public class MainActivity extends AppCompatActivity{
                 }
                 break;
         }
-        // invalidate is redundant if layout params are set or not needed if they are not set.
-//        mRrootLayout.invalidate();
         return true;
     }*/
 
+    //Function that generates a simple list of instructions to arrive at your destination
     public ArrayList<String> generateInstructions (String start, String end) {
         ArrayList<String> instructions = new ArrayList<String>();
 
@@ -354,14 +403,28 @@ public class MainActivity extends AppCompatActivity{
             return instructions;
         }
 
-        if ((roomDatabase[startIndex][1] != roomDatabase[endIndex][1]) & roomDatabase[endIndex][1] != "N/A") {
-            instructions.add("Go to the " + roomDatabase[endIndex][1] + " building.");
+        if (!roomDatabase[startIndex][1].equals(roomDatabase[endIndex][1]) & !roomDatabase[endIndex][1].equals("N/A")) {
+            String size;
+
+            switch (roomDatabase[endIndex][1]) {
+                case "North":
+                    size = "large";
+                    break;
+                case "South":
+                    size = "small";
+                    break;
+                default:
+                    size = "N/A";
+            }
+
+            instructions.add("Go to the " + roomDatabase[endIndex][1] + " (" + size + ") building.");
         }
-        else if (roomDatabase[endIndex][1] == "N/A") {
+        else if (roomDatabase[endIndex][1].equals("N/A")) {
             instructions.add("Exit the building.");
+            instructions.add("Go to the parking lot");
         }
 
-        if (roomDatabase[endIndex][2] == "N/A") {
+        if (!roomDatabase[endIndex][2].equals("N/A")) {
             instructions.add("Go to floor " + roomDatabase[endIndex][2]);
         }
 
