@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 
 import android.content.res.AssetManager;
+import android.os.Build;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -13,6 +14,9 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import android.widget.LinearLayout.LayoutParams;
 
 import android.text.InputType;
 import android.view.MotionEvent;
@@ -41,7 +45,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
+//public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
+public class MainActivity extends AppCompatActivity{
     Button bfloor1;
     Button bfloor2;
     Button bfloor3;
@@ -51,11 +56,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     ImageView floorimage;
   
-    final int numRooms = 148;
-    final int numDataFields = 4;
+    final int numRooms = 146;
+    final int numDataFields = 6;
 
     ImageButton searchButton;
     ImageButton clearButton;
+
 
     ImageView location;
 
@@ -78,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     ArrayList<String> instructions = new ArrayList<String>();
 
+    boolean displayRoom = false;
 
 
     @Override
@@ -93,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         searchButton = findViewById(R.id.searchButton);
         clearButton = findViewById(R.id.clearButton);
-        searchButton = findViewById(R.id.searchButton);
 
         bfloor1 = findViewById(R.id.bfloor1);
         bfloor2 = findViewById(R.id.bfloor2);
@@ -109,9 +115,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         //Initialize text fields
         searchBar = findViewById(R.id.searchBar);
         roomNumber = findViewById(R.id.roomNumber);
-        building= findViewById(R.id.building);
+        building = findViewById(R.id.building);
         floor = findViewById(R.id.floor);
         roomName = findViewById(R.id.roomName);
+
 
         rootlayout = (ViewGroup) findViewById(R.id.root);
 
@@ -176,6 +183,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 windowheight = rootlayout.getHeight();
             }
         });
+      
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) floorimage.getLayoutParams();
+        lp.topMargin = 100;
+        lp.bottomMargin = 200;
+        lp.rightMargin = 200;
+        lp.width = 1696;
+        lp.height = 1180;
+        floorimage.setLayoutParams(lp);
+
+
         searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
@@ -186,18 +203,40 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
 
         searchButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
+
+                roomNumber.setText("Searching");
 
                 int roomIndex = getRoomIndex(searchBar.getText().toString());
-                if(roomIndex != -1){
+                if (roomIndex != -1) {
+
+                    /*RelativeLayout.LayoutParams lp1 = (RelativeLayout.LayoutParams) floorimage.getLayoutParams();
+                    lp1.width = 1660;
+                    lp1.height = 2360;
+                    floorimage.setLayoutParams(lp1);*/
+
+
+
                     roomNumber.setText(roomDatabase[roomIndex][0]);
                     building.setText(roomDatabase[roomIndex][1]);
                     floor.setText(roomDatabase[roomIndex][2]);
                     roomName.setText(roomDatabase[roomIndex][3]);
                     displayFloor(roomDatabase[roomIndex][2]);
+
                     location.setAlpha(1.0f);
-                }
-                else{
+                    displayRoom = true;
+
+                    View location = findViewById(R.id.location);
+                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) location.getLayoutParams();
+                    int floorX = getFloorX(roomDatabase[roomIndex][2]);
+                    int floorY = getFloorY(roomDatabase[roomIndex][2]);
+                    lp.leftMargin = floorX + (int)(1.57*Integer.parseInt(roomDatabase[roomIndex][4]));
+                    lp.topMargin = floorY + (int)(1.50*Integer.parseInt(roomDatabase[roomIndex][5]));
+                    location.setLayoutParams(lp);
+
+                } else {
+                    location.setAlpha(0.0f);
+                    displayRoom = false;
                     roomNumber.setText("Couldn't find a room with that name");
                     building.setText("");
                     floor.setText("");
@@ -207,59 +246,107 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
 
         clearButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 searchBar.getText().clear();
+                location.setAlpha(0.0f);
+                displayRoom = false;
             }
         });
 
-        /*fab.setOnClickListener(new View.OnClickListener() {
+
+        rootlayout = (ViewGroup) findViewById(R.id.root);
+        rootlayout.post(new Runnable() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void run() {
+                windowwidth = rootlayout.getWidth();
+                windowheight = rootlayout.getHeight();
             }
-        });*/
+        });
 
         // Set up actions for all the buttons
         bfloor1.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
                 floorimage.setImageResource(R.drawable.floor1);
+                if(displayRoom){
+                    int roomIndex = getRoomIndex(searchBar.getText().toString());
+                    if(roomDatabase[roomIndex][2].compareTo("1") == 0){
+                        location.setAlpha(1.0f);
+                        displayRoom = true;
+                    }
+                    else{
+                        location.setAlpha(0.0f);
+                        //displayRoom = false;
+                    }
+                }
             }
         });
 
         bfloor2.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
                 floorimage.setImageResource(R.drawable.floor2);
+                if(displayRoom){
+                    int roomIndex = getRoomIndex(searchBar.getText().toString());
+                    if(roomDatabase[roomIndex][2].compareTo("2") == 0){
+                        location.setAlpha(1.0f);
+                        displayRoom = true;
+                    }
+                    else{
+                        location.setAlpha(0.0f);
+                        //displayRoom = false;
+                    }
+                }
             }
         });
 
         bfloor3.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
                 floorimage.setImageResource(R.drawable.floor3);
+                if(displayRoom){
+                    int roomIndex = getRoomIndex(searchBar.getText().toString());
+                    if(roomDatabase[roomIndex][2].compareTo("3") == 0){
+                        location.setAlpha(1.0f);
+                        displayRoom = true;
+                    }
+                    else{
+                        location.setAlpha(0.0f);
+                        //displayRoom = false;
+                    }
+                }
             }
         });
 
         bfloor4.setOnClickListener(new View.OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
                 floorimage.setAlpha(1.0f);
                 floorimage.setImageResource(R.drawable.floor4);
+                if(displayRoom){
+                    int roomIndex = getRoomIndex(searchBar.getText().toString());
+                    if(roomDatabase[roomIndex][2].compareTo("4") == 0){
+                        location.setAlpha(1.0f);
+                        displayRoom = true;
+                    }
+                    else{
+                        location.setAlpha(0.0f);
+                        //displayRoom = false;
+                    }
+                }
             }
         });
+
 
         bdirections.setOnClickListener(new View.OnClickListener(){
             public void onClick (View view){
                 alertDialog.show();
             }
         });
-
+      
     }
 
-    //Function for moving the map display around
-    public boolean onTouch(View view, MotionEvent event) {
 
+    /*public boolean onTouch(View view, MotionEvent event) {
         final int X = (int) event.getRawX();
         final int Y = (int) event.getRawY();
 
@@ -288,10 +375,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 lp.rightMargin = view.getWidth() - lp.leftMargin - windowwidth;
                 lp.bottomMargin = view.getHeight() - lp.topMargin - windowheight;
                 view.setLayoutParams(lp);
+
+                if(displayRoom){
+                    View location = findViewById(R.id.location);
+                    RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams) location.getLayoutParams();
+                    int roomIndex = getRoomIndex(searchBar.getText().toString());
+                    int floorX = getFloorX(roomDatabase[roomIndex][2]);
+                    int floorY = getFloorY(roomDatabase[roomIndex][2]);
+                    lp2.leftMargin = floorX + Integer.parseInt(roomDatabase[roomIndex][4]);
+                    lp2.topMargin = floorY + Integer.parseInt(roomDatabase[roomIndex][5]);
+                    location.setLayoutParams(lp2);
+                }
                 break;
         }
         return true;
-    }
+    }*/
 
     //Function that generates a simple list of instructions to arrive at your destination
     public ArrayList<String> generateInstructions (String start, String end) {
@@ -336,7 +434,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
 
-    private boolean getDatabase(String[][] database) {
+    private boolean getDatabase(String[][] roomDatabase) {
         assetManager = getAssets();
         //String input = "";
         try {
@@ -352,7 +450,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     bufferedReader.readLine();
                     for(int j = 0; j<numDataFields; j++){
                         if( (receiveString = bufferedReader.readLine()) != null ) {
-                            database[i][j] = receiveString;
+                            roomDatabase[i][j] = receiveString;
                         }
                     }
                     //Read in empty space between entries.
@@ -404,25 +502,35 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }*/
+    private int getFloorX(String floor){
+        return (int)floorimage.getX();
+        /*switch(floor){
+            case "1":
+                return (int)floorimage.getX();
+            case "2":
+                return (int)floor2north.getX();
+            case "3":
+                return (int)floor3north.getX();
+            case "4":
+                return (int)floor4north.getX();
+            default:
+                return (int)floor2north.getX();
+        }*/
+    }
 
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
+    private int getFloorY(String floor){
+        return (int)floorimage.getY();
+        /*switch(floor){
+            case "1":
+                return (int)floor1north.getY();
+            case "2":
+                return (int)floor2north.getY();
+            case "3":
+                return (int)floor3north.getY();
+            case "4":
+                return (int)floor4north.getY();
+            default:
+                return (int)floor2north.getY();
+        }*/
+    }
 }
