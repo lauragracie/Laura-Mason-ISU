@@ -44,7 +44,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
+//public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
+public class MainActivity extends AppCompatActivity{
     Button bfloor1;
     Button bfloor2;
     Button bfloor3;
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     boolean displayRoom = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +101,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         searchButton = findViewById(R.id.searchButton);
         clearButton = findViewById(R.id.clearButton);
-        searchButton = findViewById(R.id.searchButton);
 
         bfloor1 = findViewById(R.id.bfloor1);
         bfloor2 = findViewById(R.id.bfloor2);
@@ -120,8 +121,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         roomName = findViewById(R.id.roomName);
 
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) floorimage.getLayoutParams();
-        lp.topMargin = 400;
+        lp.topMargin = 100;
+        lp.bottomMargin = 200;
+        lp.rightMargin = 200;
+        lp.width = 1696;
+        lp.height = 1180;
         floorimage.setLayoutParams(lp);
+
 
         searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -139,6 +145,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
                 int roomIndex = getRoomIndex(searchBar.getText().toString());
                 if (roomIndex != -1) {
+
+                    /*RelativeLayout.LayoutParams lp1 = (RelativeLayout.LayoutParams) floorimage.getLayoutParams();
+                    lp1.width = 1660;
+                    lp1.height = 2360;
+                    floorimage.setLayoutParams(lp1);*/
+
+
+
                     roomNumber.setText(roomDatabase[roomIndex][0]);
                     building.setText(roomDatabase[roomIndex][1]);
                     floor.setText(roomDatabase[roomIndex][2]);
@@ -152,8 +166,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) location.getLayoutParams();
                     int floorX = getFloorX(roomDatabase[roomIndex][2]);
                     int floorY = getFloorY(roomDatabase[roomIndex][2]);
-                    lp.leftMargin = floorX + Integer.parseInt(roomDatabase[roomIndex][4]);
-                    lp.topMargin = floorY + Integer.parseInt(roomDatabase[roomIndex][5]);
+                    lp.leftMargin = floorX + (int)(1.57*Integer.parseInt(roomDatabase[roomIndex][4]));
+                    lp.topMargin = floorY + (int)(1.50*Integer.parseInt(roomDatabase[roomIndex][5]));
                     location.setLayoutParams(lp);
 
                 } else {
@@ -176,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
 
 
-        floorimage.setOnTouchListener(this);
+        //floorimage.setOnTouchListener(this);
 
 
         rootlayout = (ViewGroup) findViewById(R.id.root);
@@ -277,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         });
     }
 
-    public boolean onTouch(View view, MotionEvent event) {
+    /*public boolean onTouch(View view, MotionEvent event) {
 
         final int X = (int) event.getRawX();
         final int Y = (int) event.getRawY();
@@ -327,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         // invalidate is redundant if layout params are set or not needed if they are not set.
 //        mRrootLayout.invalidate();
         return true;
-    }
+    }*/
 
     public ArrayList<String> generateInstructions (String start, String end) {
         ArrayList<String> instructions = new ArrayList<String>();

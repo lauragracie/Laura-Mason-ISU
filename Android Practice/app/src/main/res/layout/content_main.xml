@@ -52,24 +52,51 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/root"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
+    <HorizontalScrollView
+        android:id="@+id/hsv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:measureAllChildren="false"
+        android:scrollbars="none" >
+        <!--android:layout_alignParentTop="true"
 
-        <ImageView
-            android:id="@+id/floorimage"
-            android:layout_width="415dp"
-            android:layout_height="295dp"
-            android:alpha="0"
-            android:contentDescription="@string/no_description"
-            android:scaleType="fitXY"
-            android:src="@drawable/floor1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+        <ScrollView
+             android:id="@+id/scroll"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent"
+             android:layout_above="@id/searchBar">
+         android:layout_marginEnd="@id/bfloor1">
+         android:fillViewport="true"--> >
 
-    </RelativeLayout>
+            <RelativeLayout
+            android:id="@+id/root"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:context=".MainActivity">
+
+                <ImageView
+                    android:id="@+id/floorimage"
+                    android:layout_width="415dp"
+                    android:layout_height="295dp"
+                    android:alpha="0"
+                    android:contentDescription="@string/no_description"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/floor1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+                <ImageView
+                    android:id="@+id/location"
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:alpha="0.0"
+                    app:srcCompat="@drawable/floor_location"
+                    tools:layout_editor_absoluteX="374dp"
+                    tools:layout_editor_absoluteY="527dp" />
+
+            </RelativeLayout>
+        <!--</ScrollView>-->
+    </HorizontalScrollView>
 
     <Button
         android:id="@+id/bfloor1"
@@ -129,8 +156,8 @@
         android:text="GET DIRECTIONS"
         android:translationX="200dp"
         android:translationY="540dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        tools:layout_editor_absoluteX="200dp"
+        tools:layout_editor_absoluteY="540dp" />
 
     <EditText
         android:id="@+id/searchBar"
@@ -175,14 +202,7 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <ImageView
-            android:id="@+id/location"
-            android:layout_width="17dp"
-            android:layout_height="20dp"
-            android:alpha="0.0"
-            app:srcCompat="@drawable/floor_location"
-            tools:layout_editor_absoluteX="374dp"
-            tools:layout_editor_absoluteY="527dp" />
+
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
