@@ -1,50 +1,49 @@
 package com.example.myapplication;
 
+//Import Android libraries and widgets
+
+//Import libraries for reading from files
 import android.content.res.AssetManager;
-import android.content.DialogInterface;
-import android.os.Bundle;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-
-import android.view.inputmethod.EditorInfo;
-
-import android.view.ViewGroup;
-
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import android.content.DialogInterface;
+import android.os.Bundle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.view.inputmethod.EditorInfo;
+
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import android.view.inputmethod.InputMethodManager;
 import android.content.Context;
 
-//public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
 public class MainActivity extends AppCompatActivity{
     Button bfloor1;
     Button bfloor2;
     Button bfloor3;
     Button bfloor4;
-
     Button bdirections;
+    ImageButton searchButton;
+    ImageButton clearButton;
 
     ImageView floorimage;
 
-    ImageButton searchButton;
-    ImageButton clearButton;
 
     final int numRooms = 146;
     final int numDataFields = 6;
@@ -125,8 +124,8 @@ public class MainActivity extends AppCompatActivity{
         aFrom.setHint("From");
         layout.addView(aFrom);
 
-        aFrom.setHint("To");
-        layout.addView(aFrom);
+        aTo.setHint("To");
+        layout.addView(aTo);
 
         builder.setView(layout);
 
