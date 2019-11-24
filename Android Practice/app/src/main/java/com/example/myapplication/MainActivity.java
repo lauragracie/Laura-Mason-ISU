@@ -10,30 +10,38 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import android.content.DialogInterface;
-import android.os.Bundle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.view.inputmethod.EditorInfo;
-
+//Import libraries for layout elements (buttons, images, etc)
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-import java.util.ArrayList;
-import android.view.inputmethod.InputMethodManager;
+//Import libraries for pop-up dialog
+import android.content.DialogInterface;
+import androidx.appcompat.app.AlertDialog;
+
+//Import libraries for basic app functionality
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
 import android.content.Context;
 
+//Import library to get events for keyboard and searchBar
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+
+//Import library for Arrays
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity{
+    //Declare buttons
     Button bfloor1;
     Button bfloor2;
     Button bfloor3;
@@ -42,36 +50,29 @@ public class MainActivity extends AppCompatActivity{
     ImageButton searchButton;
     ImageButton clearButton;
 
+    //Declare images for map and location marker
     ImageView floorimage;
-
-
-    final int numRooms = 146;
-    final int numDataFields = 6;
-
     ImageView location;
 
-    private ViewGroup rootlayout;
-
-    int windowwidth;
-    int windowheight;
-    private int _xDelta;
-    private int _yDelta;
-
+    //Declare text input fields
     EditText searchBar;
-
     EditText aTo;
     EditText aFrom;
 
-    TextView roomNumber;
+    TextView textDisplay;
 
     AssetManager assetManager;
 
-    String[][] roomDatabase = new String[numRooms][numDataFields];
+    //Define format of database (146 rooms with 6 data fields to read in for each)
+    final int numRooms = 146;
+    final int numDataFields = 6;
 
-    ArrayList<String> instructions = new ArrayList<String>();
+    private ViewGroup rootlayout;
 
     boolean isRoomDisplay = false;
 
+    String[][] roomDatabase = new String[numRooms][numDataFields];
+    ArrayList<String> instructions = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity{
 
         //Initialize text fields
         searchBar = findViewById(R.id.searchBar);
-        roomNumber = findViewById(R.id.roomNumber);
+        textDisplay = findViewById(R.id.roomNumber);
 
 
         rootlayout = (ViewGroup) findViewById(R.id.root);
@@ -151,11 +152,11 @@ public class MainActivity extends AppCompatActivity{
                 instructions.clear();
                 instructions = generateInstructions(from, to);
 
-                roomNumber.setText("");
+                textDisplay.setText("");
                 for (int i = 0; i < instructions.size(); i++) {
-                    roomNumber.append((i + 1) + ". ");
-                    roomNumber.append(instructions.get(i));
-                    roomNumber.append("\n");
+                    textDisplay.append((i + 1) + ". ");
+                    textDisplay.append(instructions.get(i));
+                    textDisplay.append("\n");
                 }
 
                 dialog.dismiss();
@@ -169,14 +170,6 @@ public class MainActivity extends AppCompatActivity{
         });
 
         final AlertDialog alertDialog = builder.create();
-
-        rootlayout.post(new Runnable() {
-            @Override
-            public void run() {
-                windowwidth = rootlayout.getWidth();
-                windowheight = rootlayout.getHeight();
-            }
-        });
       
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) floorimage.getLayoutParams();
         lp.topMargin = 100;
@@ -213,13 +206,6 @@ public class MainActivity extends AppCompatActivity{
         });
 
         rootlayout = (ViewGroup) findViewById(R.id.root);
-        rootlayout.post(new Runnable() {
-            @Override
-            public void run() {
-                windowwidth = rootlayout.getWidth();
-                windowheight = rootlayout.getHeight();
-            }
-        });
 
         // Set up actions for all the buttons
         bfloor1.setOnClickListener(new View.OnClickListener() {
@@ -258,7 +244,7 @@ public class MainActivity extends AppCompatActivity{
         if (roomIndex != -1) {
             displayFloor(roomDatabase[roomIndex][2]);
 
-            roomNumber.setText("");
+            textDisplay.setText("");
             location.setAlpha(1.0f);
             isRoomDisplay = true;
 
@@ -273,7 +259,7 @@ public class MainActivity extends AppCompatActivity{
         } else {
             location.setAlpha(0.0f);
             isRoomDisplay = false;
-            roomNumber.setText("Couldn't find a room with that name \n\n");
+            textDisplay.setText("Couldn't find a room with that name \n\n");
         }
     }
 
