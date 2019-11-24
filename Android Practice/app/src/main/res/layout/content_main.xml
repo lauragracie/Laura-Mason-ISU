@@ -1,86 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
 
     <TextView
-        android:id="@+id/roomNumber"
+        android:id="@+id/textDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Room Number"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.829" />
+        app:layout_constraintVertical_bias="0.92" />
 
-    <TextView
-        android:id="@+id/floor"
-        android:layout_width="wrap_content"
+    <HorizontalScrollView
+        android:id="@+id/hsv"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Floor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+        android:fillViewport="true"
+        android:measureAllChildren="false"
+        android:scrollbars="none" >
 
-    <TextView
-        android:id="@+id/building"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Building"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86" />
-
-    <TextView
-        android:id="@+id/roomName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="188dp"
-        android:layout_marginBottom="44dp"
-        android:text="Name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-  
-    <RelativeLayout
+        <RelativeLayout
         android:id="@+id/root"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         tools:context=".MainActivity">
 
-        <ImageView
-            android:id="@+id/floorimage"
-            android:layout_width="415dp"
-            android:layout_height="295dp"
-            android:alpha="0"
-            android:contentDescription="@string/no_description"
-            android:scaleType="fitXY"
-            android:src="@drawable/floor1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/floorimage"
+                android:layout_width="415dp"
+                android:layout_height="295dp"
+                android:alpha="0"
+                android:contentDescription="@string/no_description"
+                android:scaleType="centerCrop"
+                android:src="@drawable/floor1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+            <ImageView
+                android:id="@+id/location"
+                android:layout_width="17dp"
+                android:layout_height="20dp"
+                android:alpha="0.0"
+                app:srcCompat="@drawable/floor_location"
+                tools:layout_editor_absoluteX="374dp"
+                tools:layout_editor_absoluteY="527dp" />
+        </RelativeLayout>
+    </HorizontalScrollView>
 
     <Button
         android:id="@+id/bfloor1"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginTop="44dp"
         android:text="100"
         android:translationX="300dp"
-        android:translationY="60dp"
+        android:translationY="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/bfloor2"
@@ -88,7 +71,7 @@
         android:layout_height="50dp"
         android:text="200"
         android:translationX="300dp"
-        android:translationY="120dp"
+        android:translationY="90dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,7 +81,7 @@
         android:layout_height="50dp"
         android:text="300"
         android:translationX="300dp"
-        android:translationY="180dp"
+        android:translationY="140dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,17 +91,7 @@
         android:layout_height="50dp"
         android:text="400"
         android:translationX="300dp"
-        android:translationY="240dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/bclear"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="CLEAR"
-        android:translationX="300dp"
-        android:translationY="480dp"
+        android:translationY="190dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -130,8 +103,8 @@
         android:text="GET DIRECTIONS"
         android:translationX="200dp"
         android:translationY="540dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        tools:layout_editor_absoluteX="200dp"
+        tools:layout_editor_absoluteY="540dp" />
 
     <EditText
         android:id="@+id/searchBar"
@@ -169,27 +142,5 @@
         android:src="@android:drawable/btn_dialog"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/mText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="173dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floor1north" />
-
-    <ImageView
-        android:id="@+id/location"
-        android:layout_width="37dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="304dp"
-        android:alpha="0.0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/floor_location" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

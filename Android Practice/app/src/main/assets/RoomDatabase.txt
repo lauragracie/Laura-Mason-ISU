@@ -3,885 +3,1165 @@
 North
 1
 Cafeteria
+190
+75
 
 #2
 100C
 North
 1
 Kitchen
+65
+195
 
 #3
 100A
 North
 1
 N/A
+215
+165
 
 #4
 102
 North
 1
 Co-op
+390
+40
 
 #5
 102A
 North
 1
 N/A
+395
+75
 
 #6
 103A
 North
 1
 N/A
+450
+25
 
 #7
 103B
 North
 1
 N/A
+490
+25
 
 #8
 103
 North
 1
 N/A
+470
+70
 
 #9
 104
 North
 1
 N/A
+550
+20
 
 #10
 105
 North
 1
 N/A
+550
+65
 
 #11
 106
 North
 1
 N/A
+590
+60
 
 #12
 107A
 North
 1
 N/A
+660
+65
 
 #13
 107B
 North
 1
 N/A
+655
+10
 
 #14
 109
 North
 1
 N/A
+730
+20
 
 #15
 110
 North
 1
 N/A
+930
+65
 
 #16
 110A
 North
 1
 N/A
+880
+50
 
 #17
 111
 North
 1
 N/A
+965
+105
 
 #18
 111A
 North
 1
 N/A
+880
+120
 
 #19
 112
 North
 1
 N/A
+815
+135
 
 #20
 120
 North
 1
 N/A
+350
+180
 
 #21
 200
 North
 2
 Main Office
+560
+225
 
 #22
 200C
 North
 2
 Principal's Office
+470
+220
 
 #23
 200E
 North
 2
 N/A
+430
+170
 
 #24
 200F
 North
 2
 N/A
+490
+170
 
 #25
 201
 North
 2
 Vice-Principals Office
+360
+160
 
 #26
 201A
 North
 2
 N/A
+420
+230
 
 #27
 201B
 North
 2
 N/A
+370
+230
 
 #28
 201C
 North
 2
 N/A
+320
+230
 
 #29
 201D
 North
 2
 N/A
+310
+160
 
 #30
 202
 North
 2
 N/A
+240
+170
 
 #31
 203
 North
 2
 N/A
+140
+170
 
 #32
 204
 North
 2
 N/A
+60
+170
 
 #33
 206
 North
 2
 Computer Lab
+60
+50
 
 #34
 207
 North
 2
 N/A
+140
+50
 
 #35
 208
 North
 2
 N/A
+240
+50
 
 #36
 209
 North
 2
 Special Education
+400
+50
 
 #37
 209A
 North
 2
 N/A
+420
+80
 
 #38
 211
 North
 2
 Library Office
+480
+50
 
 #39
 214
 North
 2
 Library
+660
+20
 
 #40
 215
 North
 2
 N/A
+980
+50
 
 #41
 215A
 North
 2
 N/A
+900
+50
 
 #42
 216
 North
 2
 N/A
+980
+130
 
 #43
 217
 North
 2
 English Office
+860
+130
 
 #44
 217A
 North
 2
 N/A
+910
+130
 
 #45
 217B
 North
 2
 N/A
+910
+160
 
 #46
 217C
 North
 2
 N/A
+860
+160
 
 #47
 217D
 North
 2
 N/A
+820
+160
 
 #48
 219
 North
 2
 Guidance
+730
+200
 
 #49
 219A
 North
 2
 N/A
+780
+160
 
 #50
 219B
 North
 2
 N/A
+780
+190
 
 #51
 219C
 North
 2
 N/A
+780
+220
 
 #52
 300
 North
 3
 Auditorium
+200
+100
 
 #53
 301
 North
 3
 N/A
+420
+50
 
 #54
 302
 North
 3
 N/A
+560
+20
 
 #55
 303
 North
 3
 N/A
+575
+83
 
 #56
 304
 North
 3
 N/A
+590
+83
 
 #57
 305
 North
 3
 Staff Room
+640
+20
 
 #58
 305A
 North
 3
 N/A
+550
+70
 
 #59
 305B
 North
 3
 N/A
+740
+80
 
 #60
 306
 North
 3
 N/A
+740
+30
 
 #61
 307
 North
 3
 N/A
+940
+45
 
 #62
 307A
 North
 3
 N/A
+880
+45
 
 #63
 308
 North
 3
 N/A
+940
+150
 
 #64
 309
 North
 3
 Math Office
+830
+140
 
 #65
 309A
 North
 3
 N/A
+880
+140
 
 #66
 309B
 North
 3
 N/A
+880
+180
 
 #67
 309C
 North
 3
 N/A
+850
+180
 
 #68
 309D
 North
 3
 N/A
+820
+180
 
 #69
 309E
 North
 3
 N/A
+800
+160
 
 #70
 310
 North
 3
 N/A
+720
+200
 
 #71
 311
 North
 3
 Boys Washroom
+660
+230
 
 #72
 312
 North
 3
 N/A
+640
+150
 
 #73
 313
 North
 3
 Girls Washroom
+620
+230
 
 #74
 314
 North
 3
 N/A
+560
+230
 
 #75
 315
 North
 3
 N/A
+460
+240
 
 #76
 316
 North
 3
 N/A
+340
+240
 
 #77
 401
 North
 4
 N/A
+270
+50
 
 #78
 402
 North
 4
 N/A
+420
+50
 
 #79
 402A
 North
 4
 N/A
+420
+125
 
 #80
 404
 North
 4
 N/A
+560
+50
 
 #81
 404A
 North
 4
 N/A
+560
+90
 
 #82
 406
 North
 4
 Science Office
+650
+30
 
 #83
 407
 North
 4
 N/A
+720
+20
 
 #84
 408
 North
 4
 N/A
+720
+90
 
 #85
 409
 North
 4
 Computer Lab
+940
+40
 
 #86
 409A
 North
 4
 N/A
+880
+40
 
 #87
 410
 North
 4
 Visual Arts
+880
+150
 
 #88
 410A
 North
 4
 N/A
+820
+160
 
 #89
 411
 North
 4
 N/A
+670
+200
 
 #90
 411A
 North
 4
 N/A
+710
+140
 
 #91
 411B
 North
 4
 N/A
+640
+250
 
 #92
 412
 North
 4
 N/A
+540
+200
 
 #93
 412A
 North
 4
 N/A
-
-#94
-412B
-North
-4
-N/A
+550
+140
 
 #95
 413
 North
 4
 N/A
+400
+200
 
 #96
 413A
 North
 4
 N/A
+310
+240
 
 #97
 414
 North
 4
 N/A
+310
+190
 
 #98
 415
 North
 4
 N/A
+270
+170
 
 #99
 151
 South
 1
 N/A
+820
+500
 
 #100
 152
 South
 1
 N/A
+870
+550
 
 #101
 153
 South
 1
 N/A
+300
+470
 
 #102
 154
 South
 1
 N/A
+310
+560
 
 #103
 155
 South
 1
 Outdoor Ed
+200
+560
 
 #104
 155A
 South
 1
 N/A
+100
+630
 
 #105
 155B
 South
 1
 N/A
+100
+600
 
 #106
 157
 South
 1
 Computer Lab
+100
+550
 
 #107
 157A
 South
 1
 N/A
+80
+400
 
 #108
 158
 South
 1
 N/A
+140
+400
 
 #109
 159
 South
 1
 Boys Washroom
+220
+400
 
 #110
 251
 South
 2
 Phys. Ed Office
+760
+410
 
 #111
 253
 South
 2
 Equipment Room
+750
+460
 
 #112
 254
 South
 2
 N/A
+750
+580
 
 #113
 255
 South
 2
 Boys Change Room
+750
+630
 
 #114
 250
 South
 2
 Strings Room
+900
+580
 
 #115
 250A
 South
 2
 N/A
+880
+490
 
 #116
 250B
 South
 2
 N/A
+970
+480
 
 #117
 250C
 South
 2
 N/A
-
-#118
-250C
-South
-2
-N/A
+970
+500
 
 #119
 250D
 South
 2
 N/A
+970
+520
 
 #120
 250E
 South
 2
 N/A
+870
+510
 
 #121
 256
 South
 2
 Gymnasium
+570
+580
 
 #122
 256A
 South
 2
 Weight Room
+670
+740
 
 #123
 256B
 South
 2
 N/A
+410
+640
 
 #124
 257
 South
 2
 Girls Change Room
+410
+480
 
 #125
 257A
 South
 2
 N/A
+410
+420
 
 #126
 262
 South
 2
 N/A
+300
+500
 
 #127
 263
 South
 2
 Band Room
+250
+470
 
 #128
 263A
 South
 2
 N/A
+200
+490
 
 #129
 263B
 South
 2
 N/A
+170
+490
 
 #130
 263C
 South
 2
 N/A
+130
+490
 
 #131
 263D
 South
 2
 N/A
+90
+460
 
 #132
 263E
 South
 2
 N/A
+50
+460
 
 #133
 263F
 South
 2
 N/A
+50
+420
 
 #134
 258
 South
 2
 N/A
+300
+570
 
 #135
 259
 South
 2
 N/A
+300
+600
 
 #136
 260
 South
 2
 Drama Studio
+80
+650
 
 #137
 261
 South
 2
 N/A
+80
+550
 
 #138
 350
 South
 3
 N/A
+340
+560
 
 #139
 351
 South
 3
 N/A
+280
+640
 
 #140
 351A
 South
 3
 N/A
+340
+600
 
 #141
 352
 South
 3
 N/A
+280
+560
 
 #142
 353
 South
 3
 N/A
+240
+540
 
 #143
 354
 South
 3
 Computer Lab
+100
+580
 
 #144
 354A
 South
 3
 N/A
+190
+550
 
 #145
 355
 South
 3
 N/A
+100
+400
 
 #146
 356
 South
 3
 N/A
+220
+400
 
 #147
 198
 N/A
-N/A
+2
 Portable
+0
+330
 
 #148
 199
 N/A
-N/A
+2
 Portable
+0
+330
