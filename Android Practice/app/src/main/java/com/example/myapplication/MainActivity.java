@@ -308,14 +308,19 @@ public class MainActivity extends AppCompatActivity{
         }
         else if (roomDatabase[endIndex][1].equals("N/A")) {
             instructions.add("Exit the building.");
-            instructions.add("Go to the parking lot");
+            instructions.add("Go to the parking lot.");
         }
 
-        if (!roomDatabase[endIndex][2].equals("N/A")) {
+        if (!roomDatabase[endIndex][1].equals("N/A")) {
             instructions.add("Go to floor " + roomDatabase[endIndex][2]);
         }
 
-        instructions.add("Go to Room " + roomDatabase[endIndex][0]);
+        if (!roomDatabase[endIndex][3].equals("N/A")){
+            instructions.add("Go to Room " + roomDatabase[endIndex][0] + " (" + roomDatabase[endIndex][3] + ").");
+        }
+        else {
+            instructions.add("Go to Room " + roomDatabase[endIndex][0] + ".");
+        }
 
         return instructions;
     }
