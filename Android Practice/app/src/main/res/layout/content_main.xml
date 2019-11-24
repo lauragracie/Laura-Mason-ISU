@@ -146,6 +146,8 @@
         android:text="GET DIRECTIONS"
         android:translationX="200dp"
         android:translationY="540dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="200dp"
         tools:layout_editor_absoluteY="540dp" />
 

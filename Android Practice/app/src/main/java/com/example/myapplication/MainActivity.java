@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity{
 
         floorimage = findViewById(R.id.floorimage);
 
-        floorimage.setOnTouchListener(this);
+        //floorimage.setOnTouchListener(this);
         location = findViewById(R.id.location);
 
         //Initialize text fields
