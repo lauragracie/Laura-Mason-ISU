@@ -1,32 +1,18 @@
 package com.example.myapplication;
 
-
 import android.content.res.AssetManager;
-import android.os.Build;
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.os.Build;
-import android.content.Context;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import android.widget.LinearLayout.LayoutParams;
 
-import android.text.InputType;
-import android.view.MotionEvent;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Menu;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.view.MenuItem;
 
 import android.view.inputmethod.EditorInfo;
 
@@ -43,7 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
+import android.view.inputmethod.InputMethodManager;
+import android.content.Context;
 
 //public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
 public class MainActivity extends AppCompatActivity{
@@ -55,13 +42,12 @@ public class MainActivity extends AppCompatActivity{
     Button bdirections;
 
     ImageView floorimage;
-  
-    final int numRooms = 146;
-    final int numDataFields = 6;
 
     ImageButton searchButton;
     ImageButton clearButton;
 
+    final int numRooms = 146;
+    final int numDataFields = 6;
 
     ImageView location;
 
@@ -73,10 +59,11 @@ public class MainActivity extends AppCompatActivity{
     private int _yDelta;
 
     EditText searchBar;
+
+    EditText aTo;
+    EditText aFrom;
+
     TextView roomNumber;
-    TextView building;
-    TextView floor;
-    TextView roomName;
 
     AssetManager assetManager;
 
@@ -84,7 +71,7 @@ public class MainActivity extends AppCompatActivity{
 
     ArrayList<String> instructions = new ArrayList<String>();
 
-    boolean displayRoom = false;
+    boolean isRoomDisplay = false;
 
 
     @Override
@@ -109,46 +96,54 @@ public class MainActivity extends AppCompatActivity{
 
         floorimage = findViewById(R.id.floorimage);
 
-        floorimage.setOnTouchListener(this);
+        //floorimage.setOnTouchListener(this);
         location = findViewById(R.id.location);
 
         //Initialize text fields
         searchBar = findViewById(R.id.searchBar);
         roomNumber = findViewById(R.id.roomNumber);
-        building = findViewById(R.id.building);
-        floor = findViewById(R.id.floor);
-        roomName = findViewById(R.id.roomName);
 
 
         rootlayout = (ViewGroup) findViewById(R.id.root);
+
+        aTo = new EditText(this);
+        aFrom = new EditText(this);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
 
-        final EditText aFrom = new EditText(this);
+        /*final EditText aFrom = new EditText(this);
         aFrom.setHint("From");
         layout.addView(aFrom);
 
         final EditText aTo = new EditText(this);
         aTo.setHint("To");
-        layout.addView(aTo);
+        layout.addView(aTo);*/
+
+        aFrom.setHint("From");
+        layout.addView(aFrom);
+
+        aFrom.setHint("To");
+        layout.addView(aFrom);
 
         builder.setView(layout);
-
-        builder.setTitle("Title");
-        builder.setMessage("Message");
 
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                //String from = aFrom.getText().toString();
+                //String to = aTo.getText().toString();
+
                 String from = aFrom.getText().toString();
                 String to = aTo.getText().toString();
+
                 int toRoomIndex = getRoomIndex(to);
                 int fromRoomIndex = getRoomIndex(from);
                 if(toRoomIndex != -1){
                     displayFloor(roomDatabase[toRoomIndex][2]);
+                    displayRoom(to);
                     location.setAlpha(1.0f);
                 }
                 else{
@@ -204,44 +199,8 @@ public class MainActivity extends AppCompatActivity{
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
-                roomNumber.setText("Searching");
-
-                int roomIndex = getRoomIndex(searchBar.getText().toString());
-                if (roomIndex != -1) {
-
-                    /*RelativeLayout.LayoutParams lp1 = (RelativeLayout.LayoutParams) floorimage.getLayoutParams();
-                    lp1.width = 1660;
-                    lp1.height = 2360;
-                    floorimage.setLayoutParams(lp1);*/
-
-
-
-                    roomNumber.setText(roomDatabase[roomIndex][0]);
-                    building.setText(roomDatabase[roomIndex][1]);
-                    floor.setText(roomDatabase[roomIndex][2]);
-                    roomName.setText(roomDatabase[roomIndex][3]);
-                    displayFloor(roomDatabase[roomIndex][2]);
-
-                    location.setAlpha(1.0f);
-                    displayRoom = true;
-
-                    View location = findViewById(R.id.location);
-                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) location.getLayoutParams();
-                    int floorX = getFloorX(roomDatabase[roomIndex][2]);
-                    int floorY = getFloorY(roomDatabase[roomIndex][2]);
-                    lp.leftMargin = floorX + (int)(1.57*Integer.parseInt(roomDatabase[roomIndex][4]));
-                    lp.topMargin = floorY + (int)(1.50*Integer.parseInt(roomDatabase[roomIndex][5]));
-                    location.setLayoutParams(lp);
-
-                } else {
-                    location.setAlpha(0.0f);
-                    displayRoom = false;
-                    roomNumber.setText("Couldn't find a room with that name");
-                    building.setText("");
-                    floor.setText("");
-                    roomName.setText("");
-                }
+                displayRoom(searchBar.getText().toString());
+                closeKeyboard();
             }
         });
 
@@ -249,10 +208,10 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
                 searchBar.getText().clear();
                 location.setAlpha(0.0f);
-                displayRoom = false;
+                isRoomDisplay = false;
+                closeKeyboard();
             }
         });
-
 
         rootlayout = (ViewGroup) findViewById(R.id.root);
         rootlayout.post(new Runnable() {
@@ -266,130 +225,59 @@ public class MainActivity extends AppCompatActivity{
         // Set up actions for all the buttons
         bfloor1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                floorimage.setAlpha(1.0f);
-                floorimage.setImageResource(R.drawable.floor1);
-                if(displayRoom){
-                    int roomIndex = getRoomIndex(searchBar.getText().toString());
-                    if(roomDatabase[roomIndex][2].compareTo("1") == 0){
-                        location.setAlpha(1.0f);
-                        displayRoom = true;
-                    }
-                    else{
-                        location.setAlpha(0.0f);
-                        //displayRoom = false;
-                    }
-                }
+                switchFloor(1);
             }
         });
 
         bfloor2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                floorimage.setAlpha(1.0f);
-                floorimage.setImageResource(R.drawable.floor2);
-                if(displayRoom){
-                    int roomIndex = getRoomIndex(searchBar.getText().toString());
-                    if(roomDatabase[roomIndex][2].compareTo("2") == 0){
-                        location.setAlpha(1.0f);
-                        displayRoom = true;
-                    }
-                    else{
-                        location.setAlpha(0.0f);
-                        //displayRoom = false;
-                    }
-                }
+                switchFloor(2);
             }
         });
 
         bfloor3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                floorimage.setAlpha(1.0f);
-                floorimage.setImageResource(R.drawable.floor3);
-                if(displayRoom){
-                    int roomIndex = getRoomIndex(searchBar.getText().toString());
-                    if(roomDatabase[roomIndex][2].compareTo("3") == 0){
-                        location.setAlpha(1.0f);
-                        displayRoom = true;
-                    }
-                    else{
-                        location.setAlpha(0.0f);
-                        //displayRoom = false;
-                    }
-                }
+                switchFloor(3);
             }
         });
 
         bfloor4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                floorimage.setAlpha(1.0f);
-                floorimage.setImageResource(R.drawable.floor4);
-                if(displayRoom){
-                    int roomIndex = getRoomIndex(searchBar.getText().toString());
-                    if(roomDatabase[roomIndex][2].compareTo("4") == 0){
-                        location.setAlpha(1.0f);
-                        displayRoom = true;
-                    }
-                    else{
-                        location.setAlpha(0.0f);
-                        //displayRoom = false;
-                    }
-                }
+                switchFloor(4);
             }
         });
-
 
         bdirections.setOnClickListener(new View.OnClickListener(){
             public void onClick (View view){
                 alertDialog.show();
             }
         });
-      
     }
 
+    public void displayRoom(String room){
+        int roomIndex = getRoomIndex(room);
+        if (roomIndex != -1) {
+            displayFloor(roomDatabase[roomIndex][2]);
 
-    /*public boolean onTouch(View view, MotionEvent event) {
-        final int X = (int) event.getRawX();
-        final int Y = (int) event.getRawY();
+            roomNumber.setText("");
+            location.setAlpha(1.0f);
+            isRoomDisplay = true;
 
-        switch (event.getAction() & MotionEvent.ACTION_MASK) {
-            case MotionEvent.ACTION_DOWN:
-                _xDelta = X - view.getLeft();
-                _yDelta = Y - view.getTop();
-                break;
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_POINTER_DOWN:
-            case MotionEvent.ACTION_POINTER_UP:
-                // Do nothing
-                break;
-            case MotionEvent.ACTION_MOVE:
-                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) view
-                        .getLayoutParams();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    lp.removeRule(RelativeLayout.CENTER_HORIZONTAL);
-                    lp.removeRule(RelativeLayout.CENTER_VERTICAL);
-                } else {
-                    lp.addRule(RelativeLayout.CENTER_HORIZONTAL, 0);
-                    lp.addRule(RelativeLayout.CENTER_VERTICAL, 0);
-                }
-                lp.leftMargin = X - _xDelta;
-                lp.topMargin = Y - _yDelta;
-                lp.rightMargin = view.getWidth() - lp.leftMargin - windowwidth;
-                lp.bottomMargin = view.getHeight() - lp.topMargin - windowheight;
-                view.setLayoutParams(lp);
+            View location = findViewById(R.id.location);
+            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) location.getLayoutParams();
+            int floorX = getFloorX();
+            int floorY = getFloorY();
+            lp.leftMargin = floorX + (int)(1.57*Integer.parseInt(roomDatabase[roomIndex][4]));
+            lp.topMargin = floorY + (int)(1.50*Integer.parseInt(roomDatabase[roomIndex][5]));
+            location.setLayoutParams(lp);
 
-                if(displayRoom){
-                    View location = findViewById(R.id.location);
-                    RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams) location.getLayoutParams();
-                    int roomIndex = getRoomIndex(searchBar.getText().toString());
-                    int floorX = getFloorX(roomDatabase[roomIndex][2]);
-                    int floorY = getFloorY(roomDatabase[roomIndex][2]);
-                    lp2.leftMargin = floorX + Integer.parseInt(roomDatabase[roomIndex][4]);
-                    lp2.topMargin = floorY + Integer.parseInt(roomDatabase[roomIndex][5]);
-                    location.setLayoutParams(lp2);
-                }
-                break;
+        } else {
+            location.setAlpha(0.0f);
+            isRoomDisplay = false;
+            roomNumber.setText("Couldn't find a room with that name \n\n");
         }
-        return true;
-    }*/
+    }
+
 
     //Function that generates a simple list of instructions to arrive at your destination
     public ArrayList<String> generateInstructions (String start, String end) {
@@ -436,7 +324,6 @@ public class MainActivity extends AppCompatActivity{
 
     private boolean getDatabase(String[][] roomDatabase) {
         assetManager = getAssets();
-        //String input = "";
         try {
             InputStream inputStream = assetManager.open("RoomDatabase.txt");
 
@@ -458,7 +345,6 @@ public class MainActivity extends AppCompatActivity{
                 }
 
                 inputStream.close();
-                //input = stringBuilder.toString();
             }
             return true;
         }
@@ -502,35 +388,53 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private int getFloorX(String floor){
+    private int getFloorX(){
         return (int)floorimage.getX();
-        /*switch(floor){
-            case "1":
-                return (int)floorimage.getX();
-            case "2":
-                return (int)floor2north.getX();
-            case "3":
-                return (int)floor3north.getX();
-            case "4":
-                return (int)floor4north.getX();
-            default:
-                return (int)floor2north.getX();
-        }*/
     }
 
-    private int getFloorY(String floor){
+    private int getFloorY(){
         return (int)floorimage.getY();
-        /*switch(floor){
-            case "1":
-                return (int)floor1north.getY();
-            case "2":
-                return (int)floor2north.getY();
-            case "3":
-                return (int)floor3north.getY();
-            case "4":
-                return (int)floor4north.getY();
+    }
+
+    public void switchFloor(int floor){
+        floorimage.setAlpha(1.0f);
+        switch(floor){
+            case 1:
+                floorimage.setImageResource(R.drawable.floor1);
+                break;
+            case 2:
+                floorimage.setImageResource(R.drawable.floor2);
+                break;
+            case 3:
+                floorimage.setImageResource(R.drawable.floor3);
+                break;
+            case 4:
+                floorimage.setImageResource(R.drawable.floor4);
+                break;
             default:
-                return (int)floor2north.getY();
-        }*/
+                floorimage.setImageResource(R.drawable.floor2);
+                break;
+        }
+        if(isRoomDisplay){
+            int roomIndex = getRoomIndex(searchBar.getText().toString());
+            if(getRoomIndex(searchBar.getText().toString()) == -1 ){
+                   roomIndex = getRoomIndex(aTo.getText().toString());
+            }
+            if(roomDatabase[roomIndex][2].compareTo(Integer.toString(floor)) == 0){
+                location.setAlpha(1.0f);
+                isRoomDisplay = true;
+            }
+            else{
+                location.setAlpha(0.0f);
+            }
+        }
+    }
+
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
